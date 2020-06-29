@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder>{
 
+    private static final String TAG = "TweetsAdapter" ;
     Context context;
     List<Tweet> homeTimeLine;
     // Pass context and list of tweets
@@ -39,6 +41,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         // get data at position
         Tweet tweet = homeTimeLine.get(position);
         //bind the data to view holder
+        Log.d(TAG, "onBindViewHolder: "+tweet.getBody());
+
         holder.bind(tweet);
     }
 
