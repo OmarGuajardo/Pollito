@@ -20,11 +20,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     private static final String TAG = "TweetsAdapter" ;
     Context context;
-    List<Tweet> homeTimeLine;
+    List<Tweet> tweets;
     // Pass context and list of tweets
-    public TweetsAdapter(Context context, List<Tweet> homeTimeLine) {
+    public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
-        this.homeTimeLine = homeTimeLine;
+        this.tweets = tweets;
     }
 
     // For each layout we inflate an item_tweet.xml
@@ -39,7 +39,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get data at position
-        Tweet tweet = homeTimeLine.get(position);
+        Tweet tweet = tweets.get(position);
         //bind the data to view holder
         Log.d(TAG, "onBindViewHolder: "+tweet.getBody());
 
@@ -48,7 +48,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return homeTimeLine.size();
+        return tweets.size();
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        tweets.addAll(list);
+        notifyDataSetChanged();
     }
 
 
