@@ -55,7 +55,7 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchTimelineAsync(0);
+                populateHomeTimeLine();
             }
         });
         // Configure the refreshing colors
@@ -75,13 +75,12 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.i(TAG, "onSuccess!");
-                Log.d(TAG, "onSuccess: thi is the dat that we got "+json.toString());
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    tweets.clear();
                     List<Tweet> tweetsReceived= Tweet.fromJsonArray(jsonArray);
-                    tweets.addAll(tweetsReceived);
-                    tweetsAdapter.notifyDataSetChanged();
+                    tweetsAdapter.clear();
+                    tweetsAdapter.addAll(tweetsReceived);
+                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON exception",e);
                     e.printStackTrace();
@@ -95,37 +94,5 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-        // getHomeTimeline is an example endpoint.
-        client.getHomeTimeLine(new JsonHttpResponseHandler() {
-            @Override
 
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                JSONArray jsonArray = json.jsonArray;
-                try {
-                    List<Tweet> tweetsReceived= Tweet.fromJsonArray(jsonArray);
-                    // Remember to CLEAR OUT old items before appending in the new ones
-                    tweetsAdapter.clear();
-                    // ...the data has come back, add new items to your adapter...
-                    tweetsAdapter.addAll(tweetsReceived);
-                    // Now we call setRefreshing(false) to signal refresh has finished
-                    swipeContainer.setRefreshing(false);
-                    Log.d(TAG, "onRefresh Success " + json.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d("DEBUG", "Fetch timeline error: ",throwable);
-
-            }
-
-
-        });
-    }
 }
