@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -76,17 +77,8 @@ public class TimelineActivity extends AppCompatActivity {
         fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                client.postTweet(new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.i(TAG, "succesfull tweet " + json.toString());
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure: tweet " + response, throwable );
-                    }
-                },"not hard coded tweet? did it work?");
+                Intent intent = new Intent(TimelineActivity.this,ComposeActivity.class);
+                startActivity(intent);
             }
         });
 
