@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -22,18 +23,31 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
     public EditText etComposeBody;
     public onSubmitListener listener;
+    public Button btnTweet;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view  = inflater.inflate(R.layout.layout_dialog,null);
 
         builder.setView(view);
 
         etComposeBody = view.findViewById(R.id.etComposeBody);
+        btnTweet = view.findViewById(R.id.btnTweet);
+
+        btnTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.submitTweet(etComposeBody.getText().toString());
+
+            }
+        });
+
+
 
         return builder.create();
+
     };
 
     @Override
