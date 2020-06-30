@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
-<!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
 
         <TextView
             android:id="@+id/tvHandle"
@@ -57,18 +57,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage2" />
 
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivTweetImage"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            app:srcCompat="@android:color/darker_gray"-->
-<!--            app:layout_constraintDimensionRatio="H,16:9"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/action_button_1" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivTweetImage"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginTop="12dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            app:srcCompat="@android:color/darker_gray"-->
+        <!--            app:layout_constraintDimensionRatio="H,16:9"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/action_button_1" />-->
 
 
         <TextView
@@ -84,39 +84,39 @@
             app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-<!--            app:layout_constraintBottom_toTopOf="@+id/action_button_1"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/action_button_1"-->
 
 
 
-<!--        <Button-->
-<!--            style="@style/Widget.AppCompat.Button.Borderless"-->
-<!--            android:id="@+id/action_button_1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:minWidth="0dp"-->
-<!--            android:paddingStart="8dp"-->
-<!--            android:paddingEnd="8dp"-->
-<!--            android:text="action_1"-->
-<!--            android:textColor="@color/cardview_dark_background"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/ivTweetImage"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/action_button_2" />-->
+        <!--        <Button-->
+        <!--            style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--            android:id="@+id/action_button_1"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="8dp"-->
+        <!--            android:minWidth="0dp"-->
+        <!--            android:paddingStart="8dp"-->
+        <!--            android:paddingEnd="8dp"-->
+        <!--            android:text="action_1"-->
+        <!--            android:textColor="@color/cardview_dark_background"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/ivTweetImage"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/action_button_2" />-->
 
-<!--        <Button-->
-<!--            style="@style/Widget.AppCompat.Button.Borderless"-->
-<!--            android:id="@+id/action_button_2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:minWidth="0dp"-->
-<!--            android:paddingStart="8dp"-->
-<!--            android:paddingEnd="8dp"-->
-<!--            android:text="action_2"-->
-<!--            android:textColor="@color/cardview_dark_background"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/action_button_1"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
+        <!--        <Button-->
+        <!--            style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--            android:id="@+id/action_button_2"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="8dp"-->
+        <!--            android:minWidth="0dp"-->
+        <!--            android:paddingStart="8dp"-->
+        <!--            android:paddingEnd="8dp"-->
+        <!--            android:text="action_2"-->
+        <!--            android:textColor="@color/cardview_dark_background"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/action_button_1"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
