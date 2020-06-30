@@ -5,12 +5,23 @@
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         -->
+        <item name="android:colorPrimary">@color/primaryColor</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="android:colorBackgroundFloating">@color/primaryLightColor</item>
+        <item name="extendedFloatingActionButtonStyle">@color/primaryTextColor</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+        <item name="android:colorPrimary">@color/primaryColor</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="android:colorSecondary">@color/primaryColor</item>
+        <item name="android:colorAccent">@color/primaryLightColor</item>
+        <item name="extendedFloatingActionButtonStyle">@color/primaryTextColor</item>
     </style>
 
     <style name="AppBaseTheme.ComposeTheme">

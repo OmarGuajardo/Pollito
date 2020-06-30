@@ -38,6 +38,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_timeline);
 
         // Find the toolbar view inside the activity layout
@@ -46,7 +47,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.primaryTextColor));
 
         //Getting the Views
         fabCompose = findViewById(R.id.fabCompose);
@@ -78,6 +80,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 //Creating an opening a new Dialog
                 composeDialog = new ComposeDialog();
                 composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
+
             }
         });
 

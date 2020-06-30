@@ -22,6 +22,7 @@ public class ComposeDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view  = inflater.inflate(R.layout.compose_layout,null);
@@ -35,7 +36,6 @@ public class ComposeDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(View view) {
                 listener.submitTweet(etComposeBody.getText().toString());
-
             }
         });
         return builder.create();
