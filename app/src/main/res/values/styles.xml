@@ -11,10 +11,19 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
+
     </style>
 
     <style name="AppBaseTheme.ComposeTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
+
+    </style>
+
+
+    <style name="AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="android:colorPrimary">#00397F</item>
+        <item name="android:colorAccent">#0AAEEF</item>
     </style>
 </resources>

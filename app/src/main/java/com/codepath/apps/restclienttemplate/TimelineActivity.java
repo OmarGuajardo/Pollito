@@ -26,7 +26,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeDialog.onSubmitListener{
 
     public final String TAG = "TimelineActivity";
     TwitterClient client;
@@ -184,4 +184,8 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void submitTweet(String body) {
+        Log.d(TAG, "submitted the following tweet "+body);
+    }
 }
