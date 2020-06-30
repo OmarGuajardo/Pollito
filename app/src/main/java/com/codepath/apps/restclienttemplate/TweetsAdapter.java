@@ -82,12 +82,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvHandle = itemView.findViewById(R.id.tvHandle);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvName = itemView.findViewById(R.id.tvName);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(TAG, "this is the users image url " + tweets.get(getAdapterPosition()).getUser().getProfileImageUrl());
-                }
-            });
+
         }
 
         public void bind(Tweet tweet) {
@@ -95,6 +90,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody.setText(tweet.getBody());
             tvHandle.setText(tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
+            tvTimeStamp.setText(tweet.getCreatedAt());
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
                     .circleCrop()

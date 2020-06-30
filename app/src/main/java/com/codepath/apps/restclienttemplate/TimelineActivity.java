@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,6 +177,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         client.postTweet(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    Tweet newTweet = Tweet.fromJson(jsonObject);
+                    tweets.add(0,newTweet);
+                    tweetsAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 Log.d(TAG, "Successfully posted a tweet " + json.toString());
                 composeDialog.dismiss();
             }
