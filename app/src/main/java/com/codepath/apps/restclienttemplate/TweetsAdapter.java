@@ -31,7 +31,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         View view = LayoutInflater.from(context).inflate(R.layout.item_tweet,parent,false);
+         View view = LayoutInflater.from(context).inflate(R.layout.test_layout,parent,false);
         return new ViewHolder(view);
     }
 
@@ -73,11 +73,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvHandle;
         TextView tvBody;
+        TextView tvTimeStamp;
+        TextView tvName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
+            tvTimeStamp = itemView.findViewById(R.id.tvTimesStamp);
+            ivProfileImage = itemView.findViewById(R.id.ivProfileImage2);
             tvHandle = itemView.findViewById(R.id.tvHandle);
             tvBody = itemView.findViewById(R.id.tvBody);
+            tvName = itemView.findViewById(R.id.tvName);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,10 +91,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
 
         public void bind(Tweet tweet) {
+//            tvTimeStamp.setText(tweet.getCreatedAt());
             tvBody.setText(tweet.getBody());
             tvHandle.setText(tweet.getUser().getHandle());
+            tvName.setText(tweet.getUser().getName());
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
+                    .circleCrop()
                     .into(ivProfileImage);
 
         }
