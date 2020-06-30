@@ -78,6 +78,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvHandle = itemView.findViewById(R.id.tvHandle);
             tvBody = itemView.findViewById(R.id.tvBody);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "this is the users image url " + tweets.get(getAdapterPosition()).getUser().getProfileImageUrl());
+                }
+            });
         }
 
         public void bind(Tweet tweet) {
@@ -86,6 +92,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
                     .into(ivProfileImage);
+
         }
     }
+
 }
