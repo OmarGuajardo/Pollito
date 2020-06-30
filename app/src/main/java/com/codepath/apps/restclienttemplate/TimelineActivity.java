@@ -79,14 +79,14 @@ public class TimelineActivity extends AppCompatActivity {
                 client.postTweet(new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.d(TAG, "onSuccess: it was a succes!" + json.toString());
+                        Log.i(TAG, "succesfull tweet " + json.toString());
                     }
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure: failure to post tweet " +response,throwable );
+                        Log.e(TAG, "onFailure: tweet " + response, throwable );
                     }
-                });
+                },"not hard coded tweet? did it work?");
             }
         });
 
