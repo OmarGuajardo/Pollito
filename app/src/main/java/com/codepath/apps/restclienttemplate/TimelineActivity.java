@@ -77,8 +77,12 @@ public class TimelineActivity extends AppCompatActivity {
         fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TimelineActivity.this,ComposeActivity.class);
-                startActivity(intent);
+               openDialog();
+            }
+
+            private void openDialog() {
+                ComposeDialog composeDialog = new ComposeDialog();
+                composeDialog.show(getSupportFragmentManager(),"Compose Dialog");
             }
         });
 
