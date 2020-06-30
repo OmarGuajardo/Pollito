@@ -38,17 +38,14 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
             }
         });
-
-
-
         return builder.create();
-
     };
 
+
+    //Attaches the function from TimeLineActivity to this Fragment
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
         try {
             listener = (onSubmitListener)context;
         } catch (Exception e) {

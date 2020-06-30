@@ -6,14 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
-
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,23 +41,19 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
         // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
 
-        //Getting the action button
+        //Getting the Views
         fabCompose = findViewById(R.id.fabCompose);
-
-//         Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
-
-
-        //Get the Recycler View
         rvTweets = findViewById(R.id.rvTweets);
-
-        //Initialize the list of tweets
         tweets = new ArrayList<>();
+
+
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -70,9 +62,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         rvTweets.setAdapter(tweetsAdapter);
 
 
+        //Initializing the client
         client = TwitterApp.getRestClient(this);
 
 
+        //On click listener for the Compose FAB
         fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +74,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             }
 
             public void openDialog() {
+                //Creating an opening a new Dialog
                 composeDialog = new ComposeDialog();
                 composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
             }
@@ -103,42 +98,42 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         populateHomeTimeLine();
 
         //Making the endless scroll
-
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.d(TAG, "onLoadMore: " + page);
                 loadMoreData();
             }
-
-            private void loadMoreData() {
-
-                client.getNextPageOfTweets(new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        JSONArray jsonArray = json.jsonArray;
-                        try {
-                            List<Tweet> tweetsReceived = Tweet.fromJsonArray(json.jsonArray);
-                            tweetsAdapter.addAll(tweetsReceived);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Log.d(TAG, "onSuccess: for load More Data ");
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure: for load more data ", throwable);
-                    }
-                }, tweets.get(tweets.size() - 1).getId());
-            }
         };
+
 
         //Adds the scroll listener to the Recycler View
         rvTweets.addOnScrollListener(scrollListener);
 
 
+    }
+
+    public void loadMoreData() {
+
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONArray jsonArray = json.jsonArray;
+                try {
+                    List<Tweet> tweetsReceived = Tweet.fromJsonArray(json.jsonArray);
+                    tweetsAdapter.addAll(tweetsReceived);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "onSuccess: for load More Data ");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "onFailure: for load more data ", throwable);
+            }
+        }, tweets.get(tweets.size() - 1).getId());
     }
 
     private void populateHomeTimeLine() {
@@ -174,6 +169,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     }
 
 
+    //Method that handles that takes in the compose body and make a POST request to the client
     @Override
     public void submitTweet(String body) {
         Log.d(TAG, "submitted the following tweet " + body);
@@ -186,7 +182,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "Failure to post tweeet " + response,throwable );
+                Log.e(TAG, "Failure to post tweet " + response,throwable );
             }
         },body);
     }
