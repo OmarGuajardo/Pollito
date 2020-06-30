@@ -46,7 +46,7 @@ public class TimelineActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
 
         // Lookup the swipe container view
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
+//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
 
 
 
@@ -66,56 +66,56 @@ public class TimelineActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
 
 
-        //Configuring the swipe down to refresh
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                populateHomeTimeLine();
-            }
-        });
+//        //Configuring the swipe down to refresh
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                populateHomeTimeLine();
+//            }
+//        });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
 
         populateHomeTimeLine();
 
-        //Making the endless scroll
-
-        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.d(TAG, "onLoadMore: " + page);
-                loadMoreData();
-            }
-
-            private void loadMoreData() {
-
-                client.getNextPageOfTweets(new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        JSONArray jsonArray = json.jsonArray;
-                        try {
-                            List<Tweet> tweetsReceived = Tweet.fromJsonArray(json.jsonArray);
-                            tweetsAdapter.addAll(tweetsReceived);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Log.d(TAG, "onSuccess: for load More Data ");
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFailure: for load more data ",throwable );
-                    }
-                },tweets.get(tweets.size()-1).getId());
-            }
-        };
-
-        //Adds the scroll listener to the Recycler View
-        rvTweets.addOnScrollListener(scrollListener);
+//        //Making the endless scroll
+//
+//        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//                Log.d(TAG, "onLoadMore: " + page);
+//                loadMoreData();
+//            }
+//
+//            private void loadMoreData() {
+//
+//                client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+//                        JSONArray jsonArray = json.jsonArray;
+//                        try {
+//                            List<Tweet> tweetsReceived = Tweet.fromJsonArray(json.jsonArray);
+//                            tweetsAdapter.addAll(tweetsReceived);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        Log.d(TAG, "onSuccess: for load More Data ");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+//                        Log.e(TAG, "onFailure: for load more data ",throwable );
+//                    }
+//                },tweets.get(tweets.size()-1).getId());
+//            }
+//        };
+//
+//        //Adds the scroll listener to the Recycler View
+//        rvTweets.addOnScrollListener(scrollListener);
 
 
 
@@ -138,7 +138,7 @@ public class TimelineActivity extends AppCompatActivity {
                     List<Tweet> tweetsReceived= Tweet.fromJsonArray(jsonArray);
                     tweetsAdapter.clear();
                     tweetsAdapter.addAll(tweetsReceived);
-                    swipeContainer.setRefreshing(false);
+//                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON exception",e);
                     e.printStackTrace();
