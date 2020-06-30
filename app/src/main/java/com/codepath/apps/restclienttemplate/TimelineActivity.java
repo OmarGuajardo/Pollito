@@ -10,10 +10,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +33,7 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweets;
     SwipeRefreshLayout swipeContainer;
+    FloatingActionButton fabCompose;
     EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
@@ -44,6 +47,9 @@ public class TimelineActivity extends AppCompatActivity {
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
+
+        //Gettting the action button
+        fabCompose = findViewById(R.id.fabCompose);
 
 //         Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
@@ -64,6 +70,27 @@ public class TimelineActivity extends AppCompatActivity {
 
 
         client = TwitterApp.getRestClient(this);
+
+
+
+        fabCompose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                client.postTweet(new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        Log.d(TAG, "onSuccess: it was a succes!" + json.toString());
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.e(TAG, "onFailure: failure to post tweet " +response,throwable );
+                    }
+                });
+            }
+        });
+
+
 
 
         //Configuring the swipe down to refresh
