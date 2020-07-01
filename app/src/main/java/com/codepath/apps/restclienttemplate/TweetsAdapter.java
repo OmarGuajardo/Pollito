@@ -90,6 +90,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageButton btnFavorite;
         ImageButton btnReply;
         ImageButton btnReTweet;
+        ImageView ivTweetImage;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -101,6 +102,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvHandle = itemView.findViewById(R.id.tvHandle);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvName = itemView.findViewById(R.id.tvName);
+            ivTweetImage = itemView.findViewById(R.id.ivTweetImage);
 
             //Button Views
             btnFavorite = itemView.findViewById(R.id.btnFavorite);
@@ -114,6 +116,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody.setText(tweet.getBody());
             tvHandle.setText(tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
+            ivTweetImage.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load("https://pbs.twimg.com/media/Ebw0vcUXQAEd8Za?format=jpg&name=large")
+                    .fitCenter()
+                    .into(ivTweetImage);
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
                     .circleCrop()
