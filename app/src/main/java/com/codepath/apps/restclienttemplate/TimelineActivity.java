@@ -49,9 +49,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
-        binding.toolbar.setTitleTextColor(getResources().getColor(R.color.primaryTextColor));
-
         //Getting the Views
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();

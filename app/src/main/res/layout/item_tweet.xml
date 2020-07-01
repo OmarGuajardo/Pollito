@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="sans-serif-black"
                 android:text="title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/cardview_dark_background"
@@ -61,6 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
                 android:lines="1"
                 android:text="2h"
                 android:textAlignment="viewEnd"
@@ -77,7 +78,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="sans-serif"
             android:text="subhead"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/primaryLightColor"
@@ -106,21 +107,23 @@
             app:layout_constraintTop_toBottomOf="@id/ivProfileImage2"
 
             android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="8dp"
-            android:padding="10dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/cardview_dark_background"
-            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2" />
+
+            <TextView
+                android:id="@+id/tvBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:lineSpacingExtra="8dp"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/cardview_dark_background"
+                app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2" />
 
 <!--                android:visibility="gone"-->
             <ImageView
