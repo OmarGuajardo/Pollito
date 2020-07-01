@@ -100,7 +100,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvFavoriteCounter;
 
         Boolean favoriteStatus;
+        Boolean reTweetStatus;
         int favoriteCounter;
+        int retweetCounter;
         long tweetID;
 
 
@@ -136,9 +138,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
             tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
 
-            final int retweetCounter = tweet.getRetweet_count();
             favoriteCounter = tweet.getFavorite_count();
+            retweetCounter = tweet.getRetweet_count();
             favoriteStatus = tweet.getFavorited();
+            reTweetStatus = tweet.getRetweeted();
             tweetID = tweet.getId();
 
             if(tweet.getFavorited()){
@@ -168,6 +171,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     Log.d(TAG, "tweet image url " + tweet.getTweetImageURL());
                 }
             });
+
+            //On Click Listener that will like/unlike a specific tweet
             btnFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -213,6 +218,54 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     }
                         favoriteStatus = !favoriteStatus;
                 }
+            });
+
+            //On Click Listener that will retweet/unretweet a specific tweet
+            btnReTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String action;
+
+                    if(reTweetStatus){
+                        action = "unretweet";
+                        Log.d(TAG, "destroying retweet");
+                        client.reTweet(new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                                Log.d(TAG, "You unrtweeted a tweet sucess! ");
+                                tvRetweetCounter.setText(String.valueOf(retweetCounter-1));
+                                retweetCounter--;
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                                Log.e(TAG, "Failure to unretweet tweet " + response,throwable );
+                            }
+                        },tweetID,action);
+                    }
+                    else{
+                        action = "retweet";
+                        Log.d(TAG, "creating retweet");
+                        client.reTweet(new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                                tvRetweetCounter.setText(String.valueOf(retweetCounter+1));
+                                retweetCounter++;
+                                Log.d(TAG, "You retweet a tweet sucess! ");
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                                Log.e(TAG, "Failure to retweet tweet " + response,throwable );
+                            }
+                        },tweetID,action);
+
+
+                    }
+                        reTweetStatus = !reTweetStatus;
+                }
+
             });
 
 
