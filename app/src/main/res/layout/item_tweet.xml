@@ -49,11 +49,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:fontFamily="@font/prosto_one"
+                android:fontFamily="@font/asul_bold"
                 android:text="title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="15sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvTimesStamp"
@@ -76,9 +77,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif"
             android:text="subhead"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/primaryLightColor"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivProfileImage2" />
@@ -122,10 +125,13 @@
 <!--                android:visibility="gone"-->
             <ImageView
                 android:id="@+id/ivTweetImage"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
+                android:layout_height="200dp"
+                android:layout_width="300dp"
 
-                android:scaleType="centerCrop"
+
+
+                android:layout_gravity="center"
+
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
                 app:layout_constraintEnd_toEndOf="parent"

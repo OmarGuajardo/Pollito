@@ -20,6 +20,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder>{
@@ -114,7 +115,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         public void bind(final Tweet tweet) {
             tvTimeStamp.setText(tweet.getCreatedAt());
             tvBody.setText(tweet.getBody());
-            tvHandle.setText(tweet.getUser().getHandle());
+            tvHandle.setText("@"+tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
 
             if(!tweet.getTweetImageURL().isEmpty()){
@@ -122,17 +123,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 ivTweetImage.setVisibility(View.VISIBLE);
                 Glide.with(context)
                         .load(tweet.getTweetImageURL())
-                        .centerCrop()
+                        .fitCenter()
+                        .transform(new RoundedCornersTransformation(30, 10))
                         .into(ivTweetImage);
             }
             else{
                 ivTweetImage.setVisibility(View.GONE);
             }
-//            ivTweetImage.setVisibility(View.VISIBLE);
-//            Glide.with(context)
-//                    .load("https://pbs.twimg.com/media/EbzeI8yWoAEzwDH.jpg")
-//                    .centerCrop()
-//                    .into(ivTweetImage);
 
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())

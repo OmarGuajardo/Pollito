@@ -16,6 +16,7 @@ import java.util.Locale;
 public class Tweet {
     public String TAG = "Tweet.java";
     public String body;
+    public String
     public String createdAt;
     public String tweetImageURL;
     public User user;
