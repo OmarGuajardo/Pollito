@@ -76,7 +76,7 @@
 
 
         app:rippleColor="@color/primaryLightColor"
-        app:tint="@color/primaryTextColor" />
+        app:tint="@android:color/white" />
     <!--        android:src="@drawable/ic_baseline_post_add_24"-->
 
 
