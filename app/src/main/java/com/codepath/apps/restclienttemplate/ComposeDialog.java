@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class ComposeDialog extends AppCompatDialogFragment {
 
+    public String TAG = "ComposeDialog";
     public EditText etComposeBody;
     public onSubmitListener listener;
     public Button btnTweet;
@@ -30,6 +31,10 @@ public class ComposeDialog extends AppCompatDialogFragment {
         View view  = inflater.inflate(R.layout.compose_layout,null);
 
         builder.setView(view);
+
+        Bundle mArgs = getArguments();
+        String name = mArgs.getString("name");
+        Log.d(TAG, "onCreateDialog: this is what I get for name " +name);
 
         etComposeBody = view.findViewById(R.id.etComposeBody);
         btnTweet = view.findViewById(R.id.btnTweet);

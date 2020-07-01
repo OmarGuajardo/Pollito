@@ -34,8 +34,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     TweetsAdapter tweetsAdapter;
     RecyclerView rvTweets;
     List<Tweet> tweets;
-    SwipeRefreshLayout swipeContainer;
-    FloatingActionButton fabCompose;
     EndlessRecyclerViewScrollListener scrollListener;
     ComposeDialog composeDialog;
     ActivityTimelineBinding binding;
@@ -79,13 +77,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             public void onClick(View view) {
                 openDialog();
             }
-
-            public void openDialog() {
-                //Creating an opening a new Dialog
-                composeDialog = new ComposeDialog();
-                composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
-
-            }
         });
 
 
@@ -118,6 +109,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         //Adds the scroll listener to the Recycler View
         rvTweets.addOnScrollListener(scrollListener);
 
+
+    }
+    public void openDialog() {
+        //Creating an opening a new Dialog
+        composeDialog = new ComposeDialog();
+        Bundle args = new Bundle();
+        args.putString("name", "Omar");
+        composeDialog.setArguments(args);
+        composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
 
     }
 
