@@ -16,16 +16,22 @@ import java.util.Locale;
 public class Tweet {
     public String TAG = "Tweet.java";
     public String body;
-    public String
     public String createdAt;
+    public int favorite_count;
+    public int retweet_count;
     public String tweetImageURL;
     public User user;
     public long id;
+    public Boolean favorited;
+    public Boolean retweeted;
+
 
 
     public long getId() {
         return id;
     }
+
+
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -34,9 +40,28 @@ public class Tweet {
         tweet.id = jsonObject.getLong("id");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.tweetImageURL = extractMedia(jsonObject);
+        tweet.favorite_count = jsonObject.getInt("favorite_count");
+        tweet.retweet_count = jsonObject.getInt("retweet_count");
+        tweet.favorited = jsonObject.getBoolean("favorited");
+        tweet.retweeted = jsonObject.getBoolean("retweeted");
         return tweet;
     }
 
+    public int getFavorite_count() {
+        return favorite_count;
+    }
+
+    public int getRetweet_count() {
+        return retweet_count;
+    }
+
+    public Boolean getFavorited() {
+        return favorited;
+    }
+
+    public Boolean getRetweeted() {
+        return retweeted;
+    }
     public String getTweetImageURL() {
         return tweetImageURL;
     }

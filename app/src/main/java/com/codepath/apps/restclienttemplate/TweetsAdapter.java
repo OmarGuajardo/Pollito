@@ -118,6 +118,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvHandle.setText("@"+tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
 
+            if(tweet.getFavorited()){
+                btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }
             if(!tweet.getTweetImageURL().isEmpty()){
                 Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
                 ivTweetImage.setVisibility(View.VISIBLE);
@@ -145,20 +148,46 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             btnFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    client.favoriteTweet(new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Headers headers, JSON json) {
-                            Log.d(TAG, "You favorited a tweet sucess! ");
-                        }
+                    String action;
+                    if(tweet.getFavorited()){
+                        btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                        action = "destroy";
+                        Log.d(TAG, "destroying favorite");
+                        client.favoriteTweet(new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                                Log.d(TAG, "You unfavorited a tweet sucess! ");
+                            }
 
-                        @Override
-                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                            Log.e(TAG, "Failure to favorite tweet " + response,throwable );
-                        }
-                    },tweet.getId());
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                                Log.e(TAG, "Failure to favorite tweet " + response,throwable );
+                            }
+                        },tweet.getId(),action);
+                    }
+                    else{
+                        btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        action = "create";
+                        Log.d(TAG, "creating favorite");
+                        client.favoriteTweet(new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                                Log.d(TAG, "You favorited a tweet sucess! ");
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                                Log.e(TAG, "Failure to favorite tweet " + response,throwable );
+                            }
+                        },tweet.getId(),action);
+
+                    }
+
+
                 }
             });
+
+
 
         }
     }

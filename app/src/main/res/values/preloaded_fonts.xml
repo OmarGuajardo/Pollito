@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/asul_bold</item>
+        <item>@font/montserrat</item>
+        <item>@font/montserrat_bold</item>
         <item>@font/prosto_one</item>
     </array>
 </resources>
