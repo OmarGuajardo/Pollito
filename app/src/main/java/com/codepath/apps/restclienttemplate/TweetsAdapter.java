@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.content.Entity;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.databinding.ItemTweetBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -92,6 +96,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageButton btnReply;
         ImageButton btnReTweet;
         ImageView ivTweetImage;
+        TextView tvRetweetCounter;
+        TextView tvFavoriteCounter;
+
+        Boolean favoriteStatus;
+        int favoriteCounter;
+        long tweetID;
+
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -110,6 +121,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             btnReTweet = itemView.findViewById(R.id.btnReTweet);
             btnReply = itemView.findViewById(R.id.btnReply);
 
+            //Counter
+            tvRetweetCounter = itemView.findViewById(R.id.tvRetweetCounter);
+            tvFavoriteCounter = itemView.findViewById(R.id.tvFavoriteCounter);
+
+
         }
 
         public void bind(final Tweet tweet) {
@@ -117,6 +133,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody.setText(tweet.getBody());
             tvHandle.setText("@"+tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
+            tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
+            tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+
+            final int retweetCounter = tweet.getRetweet_count();
+            favoriteCounter = tweet.getFavorite_count();
+            favoriteStatus = tweet.getFavorited();
+            tweetID = tweet.getId();
 
             if(tweet.getFavorited()){
                 btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
@@ -149,7 +172,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     String action;
-                    if(tweet.getFavorited()){
+                    Log.d(TAG, "doing something with this id "+tweetID);
+                    if(favoriteStatus){
                         btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                         action = "destroy";
                         Log.d(TAG, "destroying favorite");
@@ -157,13 +181,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
                                 Log.d(TAG, "You unfavorited a tweet sucess! ");
+                                tvFavoriteCounter.setText(String.valueOf(favoriteCounter-1));
+                                favoriteCounter--;
                             }
 
                             @Override
                             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                                 Log.e(TAG, "Failure to favorite tweet " + response,throwable );
                             }
-                        },tweet.getId(),action);
+                        },tweetID,action);
                     }
                     else{
                         btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
@@ -172,6 +198,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         client.favoriteTweet(new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
+                                tvFavoriteCounter.setText(String.valueOf(favoriteCounter+1));
+                                favoriteCounter++;
                                 Log.d(TAG, "You favorited a tweet sucess! ");
                             }
 
@@ -179,17 +207,21 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                                 Log.e(TAG, "Failure to favorite tweet " + response,throwable );
                             }
-                        },tweet.getId(),action);
+                        },tweetID,action);
+
 
                     }
-
-
+                        favoriteStatus = !favoriteStatus;
                 }
             });
 
 
 
+
+
         }
+
+
     }
 
 }

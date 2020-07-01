@@ -48,6 +48,7 @@ public class Tweet {
     }
 
     public int getFavorite_count() {
+
         return favorite_count;
     }
 
