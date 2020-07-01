@@ -29,16 +29,22 @@ import okhttp3.Headers;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder>{
 
+    public interface OnReplyListener{
+        void onReplyListener(long tweetID, String userHandle);
+    }
+
     private static final String TAG = "TweetsAdapter" ;
     Context context;
     List<Tweet> tweets;
     TwitterClient client;
+    OnReplyListener replyListener;
 
     // Pass context and list of tweets
-    public TweetsAdapter(Context context, List<Tweet> tweets,TwitterClient client) {
+    public TweetsAdapter(Context context, List<Tweet> tweets,TwitterClient client, OnReplyListener onReplyListener) {
         this.context = context;
         this.tweets = tweets;
         this.client = client;
+        this.replyListener = onReplyListener;
     }
 
     // For each layout we inflate an item_tweet.xml
@@ -292,6 +298,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
                     //TODO: call a method in TimeLine Activity to start
                     // a dialog screen with some
+                    replyListener.onReplyListener(tweetID,tweet.getUser().getHandle());
                 }
             });
 

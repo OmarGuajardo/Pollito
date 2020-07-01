@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -54,8 +57,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         tweets = new ArrayList<>();
 
 
-
-
+        TweetsAdapter.OnReplyListener onReplyListener = new TweetsAdapter.OnReplyListener() {
+            @Override
+            public void onReplyListener(long tweetID, String userHandle) {
+                Log.d(TAG, "onReplyListener: " + tweetID + userHandle);
+                openDialog(tweetID ,userHandle );
+            }
+        };
 
 
         //Initializing the client
@@ -63,7 +71,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        tweetsAdapter = new TweetsAdapter(this, tweets,client);
+        tweetsAdapter = new TweetsAdapter(this, tweets,client,onReplyListener);
         rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(tweetsAdapter);
 
@@ -108,12 +116,20 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
 
     }
-    public void openDialog() {
+    public void openDialog(long tweetID, String userHandle) {
         //Creating an opening a new Dialog
         composeDialog = new ComposeDialog();
         Bundle args = new Bundle();
-        args.putString("name", "Omar");
+        args.putString("userHandle", userHandle);
+        args.putLong("tweetID", tweetID);
         composeDialog.setArguments(args);
+        composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.RESULT_SHOWN, 0);
+    }
+    public void openDialog() {
+        //Creating an opening a new Dialog
+        composeDialog = new ComposeDialog();
         composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
 
     }
