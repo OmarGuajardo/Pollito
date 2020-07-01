@@ -22,8 +22,10 @@ public class Tweet {
     public String tweetImageURL;
     public User user;
     public long id;
+
     public Boolean favorited;
     public Boolean retweeted;
+    public Tweet attachedReTweet;
 
 
 
@@ -44,7 +46,31 @@ public class Tweet {
         tweet.retweet_count = jsonObject.getInt("retweet_count");
         tweet.favorited = jsonObject.getBoolean("favorited");
         tweet.retweeted = jsonObject.getBoolean("retweeted");
+        tweet.attachedReTweet = extractReTweet(jsonObject);
         return tweet;
+    }
+
+    public Tweet getAttachedReTweet() {
+        return attachedReTweet;
+    }
+
+    public static Tweet extractReTweet(JSONObject jsonObject) {
+        Tweet retweet = new Tweet();
+        try {
+            retweet = Tweet.fromJson(jsonObject.getJSONObject("retweeted_status"));
+        } catch (JSONException e) {
+            Log.d("Tweet.java", "there is no retweet attached");
+            retweet = null;
+        }
+        return retweet;
+    }
+
+    public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
+        List<Tweet> tweets = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            tweets.add(fromJson(jsonArray.getJSONObject(i)));
+        }
+        return tweets;
     }
 
     public int getFavorite_count() {
@@ -67,13 +93,7 @@ public class Tweet {
         return tweetImageURL;
     }
 
-    public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
-        List<Tweet> tweets = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            tweets.add(fromJson(jsonArray.getJSONObject(i)));
-        }
-        return tweets;
-    }
+
 
     public static String extractMedia(JSONObject jsonObject){
         String tweetImageURL = "";
@@ -143,6 +163,11 @@ public class Tweet {
 
         return relativeDate;
     }
+
+
+
+
+
 }
 
 

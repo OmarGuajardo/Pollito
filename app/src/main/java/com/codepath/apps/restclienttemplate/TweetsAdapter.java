@@ -168,7 +168,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d(TAG, "tweet image url " + tweet.getTweetImageURL());
+                    try {
+                        Log.d(TAG, "subtweet text  " + tweet.getAttachedReTweet().getBody());
+                    } catch (Exception e) {
+                        Log.d(TAG, "no subtweet text");
+                    }
                 }
             });
 
@@ -176,7 +180,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             btnFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     String action;
+
                     Log.d(TAG, "doing something with this id "+tweetID);
                     if(favoriteStatus){
                         btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
@@ -266,6 +272,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         reTweetStatus = !reTweetStatus;
                 }
 
+            });
+
+            btnReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: call a method in TimeLine Activity to start
+                    // a dialog screen with some
+                }
             });
 
 
