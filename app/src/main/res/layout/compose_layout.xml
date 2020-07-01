@@ -25,20 +25,39 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
-        <EditText
-            android:id="@+id/etComposeBody"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textContainer"
             style="@style/AppTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="What's Popping?"
-            android:backgroundTint="@color/primaryDarkColor"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLines ="4"
-            android:maxLength ="2000"
-            android:minHeight="150dp"
-            android:selectAllOnFocus="false"
-            android:singleLine="false"
-            android:textSize="20sp" />
+            android:backgroundTint="@color/primaryColor"
+
+            android:outlineProvider="none"
+            android:textColorHint="@color/primaryColor"
+            app:boxStrokeColor="@color/primaryColor"
+            app:counterEnabled="true"
+            app:counterMaxLength="280"
+            app:endIconTint="@color/primaryColor"
+            app:hintTextColor="@color/primaryColor"
+            app:startIconTint="@color/primaryColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etComposeBody"
+                style="@style/AppTheme"
+                android:layout_width="match_parent"
+                android:textCursorDrawable="@null"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryTextColor"
+                android:hint="What's Popping?"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="280"
+                android:minHeight="150dp"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.button.MaterialButton
             style="@style/AppTheme"

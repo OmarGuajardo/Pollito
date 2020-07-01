@@ -109,7 +109,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
         }
 
-        public void bind(Tweet tweet) {
+        public void bind(final Tweet tweet) {
             tvTimeStamp.setText(tweet.getCreatedAt());
             tvBody.setText(tweet.getBody());
             tvHandle.setText(tweet.getUser().getHandle());
@@ -123,6 +123,17 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    client.favoriteTweet(new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            Log.d(TAG, "You favorited a tweet sucess! ");
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "Failure to favorite tweet " + response,throwable );
+                        }
+                    },tweet.getId());
                 }
             });
 
