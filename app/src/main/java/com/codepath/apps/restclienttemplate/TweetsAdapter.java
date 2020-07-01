@@ -117,19 +117,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvHandle.setText(tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
 
-//            if(!tweet.getTweetImageURL().isEmpty()){
-//                Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
-//                ivTweetImage.setVisibility(View.VISIBLE);
-//                Glide.with(context)
-//                        .load(tweet.getTweetImageURL())
-//                        .circleCrop()
-//                        .into(ivTweetImage);
-//            }
-            ivTweetImage.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load("http://pbs.twimg.com/media/EbukrZpUcAEfwed.jpg")
-                    .centerCrop()
-                    .into(ivTweetImage);
+            if(!tweet.getTweetImageURL().isEmpty()){
+                Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
+                ivTweetImage.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(tweet.getTweetImageURL())
+                        .centerCrop()
+                        .into(ivTweetImage);
+            }
+            else{
+                ivTweetImage.setVisibility(View.GONE);
+            }
+//            ivTweetImage.setVisibility(View.VISIBLE);
+//            Glide.with(context)
+//                    .load("https://pbs.twimg.com/media/EbzeI8yWoAEzwDH.jpg")
+//                    .centerCrop()
+//                    .into(ivTweetImage);
 
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())

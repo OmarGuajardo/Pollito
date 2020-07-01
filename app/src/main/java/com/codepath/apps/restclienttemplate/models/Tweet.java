@@ -52,7 +52,7 @@ public class Tweet {
         String tweetImageURL = "";
         try {
             JSONArray array = jsonObject.getJSONObject("extended_entities").getJSONArray("media");
-            tweetImageURL = array.getJSONObject(0).getString("media_url");
+            tweetImageURL = array.getJSONObject(0).getString("media_url_https");
             Log.d("Tweet.java", "extractMedia: sucess here is the url  " + tweetImageURL);
         } catch (JSONException e) {
             Log.e("Tweet.java", "extractMedia: failed  " + e.toString());
