@@ -71,7 +71,7 @@
         android:backgroundTint="@color/primaryColor"
         android:clickable="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_baseline_post_add_24"
+        android:src="@drawable/vector_compose_fab"
         android:tint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

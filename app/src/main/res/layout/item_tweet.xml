@@ -195,7 +195,7 @@
                         android:background="?android:attr/selectableItemBackground"
                         android:minWidth="0dp"
                         android:padding="4dp"
-                        android:src="@drawable/ic_baseline_favorite_border_24" />
+                        android:src="@drawable/ic_vector_heart_stroke" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -219,7 +219,7 @@
                         android:background="?android:attr/selectableItemBackground"
                         android:minWidth="0dp"
                         android:padding="4dp"
-                        android:src="@drawable/ic_baseline_height_24" />
+                        android:src="@drawable/ic_vector_retweet_stroke" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -237,7 +237,7 @@
 
                         android:minWidth="0dp"
                         android:padding="4dp"
-                        android:src="@drawable/ic_baseline_comment_24" />
+                        android:src="@drawable/ic_vector_messages_stroke" />
                 </LinearLayout>
 
 
