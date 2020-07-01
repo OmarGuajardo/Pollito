@@ -19,7 +19,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textContainer"
-            style="@style/AppTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primaryColor"
@@ -28,6 +27,7 @@
             android:textColorHint="@color/primaryColor"
             app:boxStrokeColor="@color/primaryColor"
             app:counterEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:counterMaxLength="280"
             app:endIconTint="@color/primaryColor"
             app:hintTextColor="@color/primaryColor"
@@ -42,7 +42,6 @@
                 android:hint="What's Popping?"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="280"
-                android:minHeight="150dp"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
                 android:textSize="20sp" />
