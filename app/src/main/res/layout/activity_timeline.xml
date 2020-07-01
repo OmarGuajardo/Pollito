@@ -20,13 +20,20 @@
         android:theme="@style/AppTheme">
 
         <!-- Toolbar is the actual app bar with text and the action items -->
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primaryColor"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways"/>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:theme="@style/AppTheme"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/primaryColor"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

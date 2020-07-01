@@ -121,6 +121,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             if(tweet.getFavorited()){
                 btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24);
             }
+            else{
+                btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+
+            }
             if(!tweet.getTweetImageURL().isEmpty()){
                 Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
                 ivTweetImage.setVisibility(View.VISIBLE);

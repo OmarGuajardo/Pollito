@@ -60,7 +60,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            style="@style/AppTheme"
+            style="?attr/elevation"
             android:id="@+id/btnTweet"
             android:layout_gravity="right"
             android:backgroundTint="@color/primaryColor"
