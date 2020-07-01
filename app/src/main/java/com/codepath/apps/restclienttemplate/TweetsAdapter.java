@@ -98,12 +98,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivTweetImage;
         TextView tvRetweetCounter;
         TextView tvFavoriteCounter;
+        TextView tvRetweetStatus;
 
         Boolean favoriteStatus;
         Boolean reTweetStatus;
         int favoriteCounter;
         int retweetCounter;
         long tweetID;
+        Tweet tweet;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -117,6 +119,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody = itemView.findViewById(R.id.tvBody);
             tvName = itemView.findViewById(R.id.tvName);
             ivTweetImage = itemView.findViewById(R.id.ivTweetImage);
+            tvRetweetStatus = itemView.findViewById(R.id.tvRetweetStatus);
 
             //Button Views
             btnFavorite = itemView.findViewById(R.id.btnFavorite);
@@ -130,13 +133,23 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
         }
 
-        public void bind(final Tweet tweet) {
+        public void bind(final Tweet t) {
+            if(t.getAttachedReTweet() != null) {
+                tvRetweetStatus.setText("@"+t.getUser().getHandle());
+                tweet = t.getAttachedReTweet();
+                tvRetweetStatus.setVisibility(View.VISIBLE);
+
+            } else  {
+                tweet = t;
+                tvRetweetStatus.setVisibility(View.GONE);
+            }
             tvTimeStamp.setText(tweet.getCreatedAt());
             tvBody.setText(tweet.getBody());
             tvHandle.setText("@"+tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
             tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
             tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+
 
             favoriteCounter = tweet.getFavorite_count();
             retweetCounter = tweet.getRetweet_count();

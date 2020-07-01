@@ -37,6 +37,7 @@ public class Tweet {
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
+
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.id = jsonObject.getLong("id");
@@ -46,7 +47,16 @@ public class Tweet {
         tweet.retweet_count = jsonObject.getInt("retweet_count");
         tweet.favorited = jsonObject.getBoolean("favorited");
         tweet.retweeted = jsonObject.getBoolean("retweeted");
-        tweet.attachedReTweet = extractReTweet(jsonObject);
+        try {
+            JSONObject jsonObject1 = jsonObject.getJSONObject("retweeted_status");
+            tweet.attachedReTweet =  Tweet.fromJson(jsonObject1);;
+            Log.d("Tweet.java", "this is a retweet here is the json " + jsonObject1.toString());
+        }
+        catch (JSONException e) {
+            tweet.attachedReTweet =  null;
+            Log.d("Tweet.java", "there is no retweet attached");
+        }
+
         return tweet;
     }
 
@@ -54,16 +64,6 @@ public class Tweet {
         return attachedReTweet;
     }
 
-    public static Tweet extractReTweet(JSONObject jsonObject) {
-        Tweet retweet = new Tweet();
-        try {
-            retweet = Tweet.fromJson(jsonObject.getJSONObject("retweeted_status"));
-        } catch (JSONException e) {
-            Log.d("Tweet.java", "there is no retweet attached");
-            retweet = null;
-        }
-        return retweet;
-    }
 
     public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
         List<Tweet> tweets = new ArrayList<>();
