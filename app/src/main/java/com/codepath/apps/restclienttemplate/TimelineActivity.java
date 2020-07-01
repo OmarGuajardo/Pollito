@@ -218,4 +218,30 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             }
         },body);
     }
+    //Method that handles that takes in the compose body and make a POST request to the client
+    @Override
+    public void submitTweet(String body, long tweetID) {
+        Log.d(TAG, "submitted the following tweet " + body);
+        client.postTweet(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    Tweet newTweet = Tweet.fromJson(jsonObject);
+                    tweets.add(0,newTweet);
+                    tweetsAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG, "Successfully posted a tweet " + json.toString());
+                composeDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "Failure to post tweet " + response,throwable );
+            }
+        },body,tweetID);
+    }
 }

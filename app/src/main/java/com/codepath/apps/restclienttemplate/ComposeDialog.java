@@ -33,6 +33,7 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
+        //When the dialog is dismissed the
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
         super.onDismiss(dialog);
@@ -59,17 +60,25 @@ public class ComposeDialog extends AppCompatDialogFragment {
             Log.d(TAG, "onCreateDialog: this is what I get for tweetID " +tweetID);
             etComposeBodyContainer.setHint("Replying to @"+userHandle);
             etComposeBody.requestFocus();
+            btnTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.submitTweet("@"+userHandle+" "+etComposeBody.getText().toString(),tweetID);
+                }
+            });
         } catch (Exception e) {
+
             Log.d(TAG, "onCreateDialog: no argumetns passed ");
+            btnTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.submitTweet(etComposeBody.getText().toString());
+                }
+            });
         }
 
 
-        btnTweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.submitTweet(etComposeBody.getText().toString());
-            }
-        });
+
         return builder.create();
     };
 
@@ -87,5 +96,6 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
     public interface onSubmitListener{
         void submitTweet(String body);
+        void submitTweet(String body,long ID);
     }
 }
