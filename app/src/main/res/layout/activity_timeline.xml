@@ -50,24 +50,27 @@
             android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCompose"
         style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_post_add_24"
-        app:tint="@color/primaryTextColor"
-        android:backgroundTint="@color/primaryColor"
-        android:scaleType="fitCenter"
-        android:layout_marginBottom="16dp"
+        android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
+        app:borderWidth="0dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primaryColor"
         android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_post_add_24"
+        android:tint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="bottom|end"
 
 
-        />
+        app:rippleColor="@color/primaryLightColor"
+        app:tint="@color/primaryTextColor" />
     <!--        android:src="@drawable/ic_baseline_post_add_24"-->
 
 

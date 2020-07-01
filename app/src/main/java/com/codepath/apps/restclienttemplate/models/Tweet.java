@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,8 +14,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class Tweet {
+    public String TAG = "Tweet.java";
     public String body;
     public String createdAt;
+    public String tweetImageURL;
     public User user;
     public long id;
 
@@ -29,7 +32,12 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.id = jsonObject.getLong("id");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.tweetImageURL = extractMedia(jsonObject);
         return tweet;
+    }
+
+    public String getTweetImageURL() {
+        return tweetImageURL;
     }
 
     public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
@@ -38,6 +46,18 @@ public class Tweet {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
+    }
+
+    public static String extractMedia(JSONObject jsonObject){
+        String tweetImageURL = "";
+        try {
+            JSONArray array = jsonObject.getJSONObject("extended_entities").getJSONArray("media");
+            tweetImageURL = array.getJSONObject(0).getString("media_url");
+            Log.d("Tweet.java", "extractMedia: sucess here is the url  " + tweetImageURL);
+        } catch (JSONException e) {
+            Log.e("Tweet.java", "extractMedia: failed  " + e.toString());
+        }
+        return tweetImageURL;
     }
 
     public String getBody() {
@@ -50,7 +70,7 @@ public class Tweet {
         if(ago.contains("minutes")){
             ago = ago.replace("minutes","min");
             return ago;
-        }if(ago.contains("minute")){
+        }else if(ago.contains("minute")){
             ago = ago.replace("minute","min");
             return ago;
         }
@@ -68,7 +88,7 @@ public class Tweet {
             ago = ago.replace("second","s");
             return ago;
         }
-        else if(ago.contains("days ago")){
+        else if(ago.contains("days")){
            ago = ago.replace("days","d");
             return ago;
         }

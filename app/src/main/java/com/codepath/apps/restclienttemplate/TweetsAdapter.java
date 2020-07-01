@@ -116,16 +116,32 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody.setText(tweet.getBody());
             tvHandle.setText(tweet.getUser().getHandle());
             tvName.setText(tweet.getUser().getName());
+
+//            if(!tweet.getTweetImageURL().isEmpty()){
+//                Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
+//                ivTweetImage.setVisibility(View.VISIBLE);
+//                Glide.with(context)
+//                        .load(tweet.getTweetImageURL())
+//                        .circleCrop()
+//                        .into(ivTweetImage);
+//            }
             ivTweetImage.setVisibility(View.VISIBLE);
             Glide.with(context)
-                    .load("https://pbs.twimg.com/media/Ebw0vcUXQAEd8Za?format=jpg&name=large")
-                    .fitCenter()
+                    .load("http://pbs.twimg.com/media/EbukrZpUcAEfwed.jpg")
+                    .centerCrop()
                     .into(ivTweetImage);
+
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
                     .circleCrop()
                     .into(ivProfileImage);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "tweet image url " + tweet.getTweetImageURL());
+                }
+            });
             btnFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

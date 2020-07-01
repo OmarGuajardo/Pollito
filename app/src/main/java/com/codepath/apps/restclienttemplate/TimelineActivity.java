@@ -129,6 +129,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     List<Tweet> tweetsReceived = Tweet.fromJsonArray(json.jsonArray);
+                    Log.d(TAG, "home time line received " + json.toString());
                     tweetsAdapter.addAll(tweetsReceived);
 
                 } catch (JSONException e) {
@@ -152,6 +153,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     List<Tweet> tweetsReceived = Tweet.fromJsonArray(jsonArray);
+                    Log.d(TAG, "home time line received " + json.toString());
                     tweetsAdapter.clear();
                     tweetsAdapter.addAll(tweetsReceived);
                     binding.refreshLayout.setRefreshing(false);
