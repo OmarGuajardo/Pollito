@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+
+import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,41 +38,43 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     FloatingActionButton fabCompose;
     EndlessRecyclerViewScrollListener scrollListener;
     ComposeDialog composeDialog;
+    ActivityTimelineBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        binding = ActivityTimelineBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         // Find the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.primaryTextColor));
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
+        binding.toolbar.setTitleTextColor(getResources().getColor(R.color.primaryTextColor));
 
         //Getting the Views
-        fabCompose = findViewById(R.id.fabCompose);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
 
 
 
-        //Recycler view setup: layout manager and the adapter
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        tweetsAdapter = new TweetsAdapter(this, tweets);
-        rvTweets.setLayoutManager(linearLayoutManager);
-        rvTweets.setAdapter(tweetsAdapter);
+
 
 
         //Initializing the client
         client = TwitterApp.getRestClient(this);
 
+        //Recycler view setup: layout manager and the adapter
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        tweetsAdapter = new TweetsAdapter(this, tweets,client);
+        rvTweets.setLayoutManager(linearLayoutManager);
+        rvTweets.setAdapter(tweetsAdapter);
+
 
         //On click listener for the Compose FAB
-        fabCompose.setOnClickListener(new View.OnClickListener() {
+        binding.fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog();
@@ -86,14 +90,14 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
 
         //Configuring the swipe down to refresh
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 populateHomeTimeLine();
             }
         });
 //         Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        binding.refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -150,7 +154,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                     List<Tweet> tweetsReceived = Tweet.fromJsonArray(jsonArray);
                     tweetsAdapter.clear();
                     tweetsAdapter.addAll(tweetsReceived);
-                    swipeContainer.setRefreshing(false);
+                    binding.refreshLayout.setRefreshing(false);
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON exception", e);
                     e.printStackTrace();

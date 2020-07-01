@@ -45,7 +45,35 @@ public class Tweet {
     }
 
     public String getCreatedAt() {
-        return getRelativeTimeAgo(this.createdAt);
+        String ago = getRelativeTimeAgo(this.createdAt);
+        ago = ago.replace("ago","");
+        if(ago.contains("minutes")){
+            ago = ago.replace("minutes","min");
+            return ago;
+        }if(ago.contains("minute")){
+            ago = ago.replace("minute","min");
+            return ago;
+        }
+        else if(ago.contains("hours")){
+            ago = ago.replace("hours","hr");
+            return ago;
+        } else if(ago.contains("hour")){
+            ago = ago.replace("hour","hr");
+            return ago;
+        }
+        else if(ago.contains("seconds")){
+            ago = ago.replace("seconds","s");
+            return ago;
+        } else if(ago.contains("second")){
+            ago = ago.replace("second","s");
+            return ago;
+        }
+        else if(ago.contains("days ago")){
+           ago = ago.replace("days","d");
+            return ago;
+        }
+        return ago;
+
     }
 
     public User getUser() {

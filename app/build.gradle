@@ -5,7 +5,7 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.codepath.apps.restclienttemplate"
@@ -34,9 +34,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+
+    apply plugin: 'com.android.application'
+    viewBinding {
+        enabled = true
+    }
 }
 
-apply plugin: 'com.android.application'
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
