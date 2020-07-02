@@ -86,7 +86,6 @@
                 android:gravity="right"
                 android:lines="1"
                 android:text="2h"
-                android:textAlignment="viewEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/cardview_dark_background" />
 

@@ -223,7 +223,7 @@
                         android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
                         android:padding="8dp"
-                        android:src="@drawable/ic_vector_heart"
+                        android:src="@drawable/state_favorite"
                         />
                 </LinearLayout>
 
@@ -250,7 +250,7 @@
                         android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
                         android:padding="8dp"
-                        android:src="@drawable/ic_vector_retweet_stroke" />
+                        android:src="@drawable/state_retweet" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -75,10 +75,7 @@ public class Tweet{
         return tweets;
     }
 
-    public int getFavorite_count() {
 
-        return favorite_count;
-    }
 
     public void changeFavorite_count(int favorite_count) {
         this.favorite_count = this.favorite_count + favorite_count;
@@ -89,13 +86,13 @@ public class Tweet{
     }
 
     public void toggleFavorited() {
-        this.favorited = !this.favorited;
+        favorited = !favorited;
     }
 
     public void toggleRetweeted() {
-        this.retweeted = !this.retweeted;
+        retweeted = !retweeted;
     }
-
+    public int getFavorite_count() { return favorite_count; }
     public int getRetweet_count() {
         return retweet_count;
     }
@@ -108,7 +105,7 @@ public class Tweet{
         return retweeted;
     }
     public String getTweetImageURL() {
-        return tweetImageURL;
+        return this.tweetImageURL;
     }
 
 

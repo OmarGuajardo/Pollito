@@ -199,47 +199,25 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
 
                     String action;
-                    Log.d(TAG, "doing something with this id "+tweetID);
+                    final int toggleVal;
+                    action = (tweet.getFavorited() ? "destroy" : "create");
+                    toggleVal = (tweet.getFavorited() ? -1 : 1);
+                    client.favoriteTweet(new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            tweet.changeFavorite_count(toggleVal);
+                            tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+                            Log.d(TAG, "You favorite/unfavorited a tweet sucess! ");
+                        }
 
-                    if(tweet.getFavorited()){
-                        btnFavorite.setSelected(false);
-                        action = "destroy";
-                        Log.d(TAG, "destroying favorite");
-                        client.favoriteTweet(new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                tweet.changeFavorite_count(-1);
-                                Log.d(TAG, "You unfavorited a tweet sucess! ");
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                                Log.e(TAG, "Failure to favorite tweet " + response,throwable );
-                            }
-                        },tweetID,action);
-                    }
-                    else{
-                        btnFavorite.setSelected(true);
-                        action = "create";
-                        Log.d(TAG, "creating favorite");
-                        client.favoriteTweet(new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                tweet.changeFavorite_count(1);
-                                Log.d(TAG, "You favorited a tweet sucess! ");
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                                Log.e(TAG, "Failure to favorite tweet " + response,throwable );
-                            }
-                        },tweetID,action);
-
-
-                    }
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "Failure to favorite/unfavorite tweet " + response,throwable );
+                        }
+                    },tweetID,action);
                         tweet.toggleFavorited();
                         btnFavorite.setSelected(tweet.getFavorited());
-                        tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+
 
                 }
             });
@@ -250,44 +228,26 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
 
                     String action;
+                    final int toggleVal;
+                    action = (tweet.getRetweeted() ? "retweet" : "unretweet");
+                    toggleVal= (tweet.getRetweeted() ? -1 : 1);
 
-                    if(tweet.getRetweeted()){
-                        action = "unretweet";
-                        Log.d(TAG, "destroying retweet");
-                        client.reTweet(new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                Log.d(TAG, "You unrtweeted a tweet sucess! ");
-                                tweet.changeRetweet_count(-1);
-                            }
+                    client.reTweet(new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            Log.d(TAG, "You retweeted/unretweeted a tweet sucess! ");
+                            tweet.changeRetweet_count(toggleVal);
+                            tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
+                        }
 
-                            @Override
-                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                                Log.e(TAG, "Failure to unretweet tweet " + response,throwable );
-                            }
-                        },tweetID,action);
-                    }
-                    else{
-                        action = "retweet";
-                        Log.d(TAG, "creating retweet");
-                        client.reTweet(new JsonHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                Log.d(TAG, "You retweet a tweet sucess! ");
-                                tweet.changeRetweet_count(1);
-                            }
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "Failure to retweet/unretweed a tweet " + response,throwable );
+                        }
+                    },tweetID,action);
 
-                            @Override
-                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                                Log.e(TAG, "Failure to retweet tweet " + response,throwable );
-                            }
-                        },tweetID,action);
-
-
-                    }
-                    tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
                     tweet.toggleRetweeted();
-                        btnReTweet.setSelected(tweet.getRetweeted());
+                    btnReTweet.setSelected(tweet.getRetweeted());
 
                 }
 
