@@ -68,8 +68,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
 
-
-
+        //Setting the duration of the loading animation
         Timer timer;
         binding.rvTweets.setVisibility(View.INVISIBLE);
         donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
@@ -92,8 +91,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 });
             }
         }, 10, 10);
-
-
 
         //Method that will be passed down to the adapter to be able to reply
         TweetsAdapter.OnReplyListener onReplyListener = new TweetsAdapter.OnReplyListener() {

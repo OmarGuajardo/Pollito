@@ -11,17 +11,25 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.databinding.ActivityTweetDetailsBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import okhttp3.Headers;
 
-public class TweetDetailsActivity extends AppCompatActivity {
+public class TweetDetailsActivity extends AppCompatActivity implements ComposeDialog.onSubmitListener{
 
 
     ActivityTweetDetailsBinding binding;
     TwitterUserFunctions twitterUserFunctions;
+    ComposeDialog composeDialog;
+    TwitterClient client;
     String TAG = "TweetDetailsActivity";
+    Tweet tweet;
 
     @Override
     public void onDetachedFromWindow() {
@@ -38,8 +46,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        client = TwitterApp.getRestClient(this);
+
         //Unwrapping the tweet
-        Tweet tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetObject"));
+        tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetObject"));
         Tweet originalTweet;
 
         //Checking to see if the tweet is a retweet
@@ -95,6 +105,19 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 twitterUserFunctions.toggleReTweet(binding.btnReTweet,binding.tvRetweetCounter);
             }
         });
+
+        binding.btnReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                composeDialog = new ComposeDialog();
+                Bundle args = new Bundle();
+                args.putString("userHandle", tweet.getUser().getHandle());
+                args.putLong("tweetID", tweet.getId());
+                composeDialog.setArguments(args);
+                composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
+            }
+        });
+
     }
 
     @Override
@@ -106,5 +129,38 @@ public class TweetDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void submitTweet(String body) {
+
+    }
+
+    @Override
+    public void submitTweet(String body, long ID) {
+        Log.d(TAG, "submitted the following tweet " + body);
+        client.postTweet(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    Tweet newTweet = Tweet.fromJson(jsonObject);
+//                    tweets.add(0,newTweet);
+//                    tweetsAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG, "Successfully posted a tweet " + json.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "Failure to post tweet " + response,throwable );
+            }
+        },body,tweet.getId());
+        composeDialog.dismiss();
+        Snackbar.make(binding.detailsActivityContainer, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
     }
 }
