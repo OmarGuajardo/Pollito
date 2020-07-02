@@ -32,7 +32,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
         setSupportActionBar(binding.tooolbarDetails);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().hide();
 
         if(tweet.getAttachedReTweet() != null){
             binding.tvRetweetStatus.setText("@"+tweet.getUser().getHandle());
