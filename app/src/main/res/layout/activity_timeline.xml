@@ -12,7 +12,10 @@
     android:layout_height="match_parent">
 
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <!-- AppBarLayout is a wrapper for a Toolbar in order to apply scrolling effects. -->
     <!-- Note that AppBarLayout expects to be the first child nested within a CoordinatorLayout -->
     <com.google.android.material.appbar.AppBarLayout
@@ -46,21 +49,8 @@
                 android:textStyle="bold" />
 
         </com.google.android.material.appbar.MaterialToolbar>
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--            android:id="@+id/toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:theme="@style/AppTheme"-->
-        <!--            android:layout_height="?attr/actionBarSize"-->
-        <!--            android:background="@color/primaryColor"-->
-        <!--            app:titleTextColor="@android:color/white"-->
-        <!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
-
-
 
 
 
@@ -69,12 +59,17 @@
         android:layout_height="match_parent">
 
 
-        <com.github.lzyzsd.circleprogress.DonutProgress
-            android:id="@+id/donut_progress"
+        <ProgressBar
             android:layout_width="wrap_content"
+            android:id="@+id/progressCircular"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
+<!--        <com.github.lzyzsd.circleprogress.DonutProgress-->
+<!--            android:id="@+id/donut_progress"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -113,6 +108,6 @@
         app:rippleColor="@color/primaryLightColor"
         app:tint="@android:color/white" />
     <!--        android:src="@drawable/ic_baseline_post_add_24"-->
-
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

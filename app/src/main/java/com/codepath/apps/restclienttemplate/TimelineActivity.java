@@ -80,26 +80,26 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         //Setting the duration of the loading animation
         Timer timer;
         binding.rvTweets.setVisibility(View.INVISIBLE);
-        donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
+//        donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
 
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        donutProgress.setProgress(donutProgress.getProgress() + 1);
-                        if(donutProgress.getProgress() == 100){
-                            binding.rvTweets.setVisibility(View.VISIBLE);
-                            donutProgress.setVisibility(View.INVISIBLE);
-                            cancel();
-                        }
-                    }
-                });
-            }
-        }, 10, 10);
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        donutProgress.setProgress(donutProgress.getProgress() + 1);
+//                        if(donutProgress.getProgress() == 100){
+//                            binding.rvTweets.setVisibility(View.VISIBLE);
+//                            donutProgress.setVisibility(View.INVISIBLE);
+//                            cancel();
+//                        }
+//                    }
+//                });
+//            }
+//        }, 10, 10);
 
         //Method that will be passed down to the adapter to be able to reply
         TweetsAdapter.OnReplyListener onReplyListener = new TweetsAdapter.OnReplyListener() {
@@ -233,6 +233,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                     tweetsAdapter.clear();
                     tweetsAdapter.addAll(tweetsReceived);
                     binding.refreshLayout.setRefreshing(false);
+                    binding.progressCircular.setVisibility(View.INVISIBLE);
+                    binding.rvTweets.setVisibility(View.VISIBLE);
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON exception", e);
                     e.printStackTrace();
