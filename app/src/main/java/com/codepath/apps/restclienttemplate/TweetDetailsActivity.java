@@ -20,6 +20,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
     ActivityTweetDetailsBinding binding;
+    TwitterUserFunctions twitterUserFunctions;
     String TAG = "TweetDetailsActivity";
 
     @Override
@@ -32,13 +33,16 @@ public class TweetDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTweetDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Tweet tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetObject"));
-        Tweet originalTweet;
 
         setSupportActionBar(binding.tooolbarDetails);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //Unwrapping the tweet
+        Tweet tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetObject"));
+        Tweet originalTweet;
+
+        //Checking to see if the tweet is a retweet
         if(tweet.getAttachedReTweet() != null){
             binding.tvRetweetStatus.setText("@"+tweet.getUser().getHandle());
             originalTweet = tweet;
@@ -48,6 +52,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
         else{
             binding.tvRetweetStatus.setVisibility(View.GONE);
         }
+
+        //If there is no image in the tweet ivTweetImage will be hidden
         if(!tweet.getTweetImageURL().isEmpty()){
             binding.ivTweetImage.setVisibility(View.VISIBLE);
             Glide.with(getApplicationContext())
@@ -60,23 +66,35 @@ public class TweetDetailsActivity extends AppCompatActivity {
            binding.ivTweetImage.setVisibility(View.GONE);
         }
 
+        //Initializing the twitterUserFunctions
+        twitterUserFunctions = new TwitterUserFunctions(getApplicationContext(),tweet);
+
         binding.btnFavorite.setSelected(tweet.getFavorited());
         binding.btnReTweet.setSelected(tweet.getRetweeted());
-
-        Glide.with(getApplicationContext())
-                .load(tweet.getUser().getProfileImageUrl())
-                .circleCrop()
-                .into(binding.ivProfileImage2);
-
-
         binding.tvTimesStamp.setText(tweet.getCreatedAt());
         binding.tvBody.setText(tweet.getBody());
         binding.tvHandle.setText("@"+tweet.getUser().getHandle());
         binding.tvName.setText(tweet.getUser().getName());
         binding.tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
         binding.tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+        Glide.with(getApplicationContext())
+                .load(tweet.getUser().getProfileImageUrl())
+                .circleCrop()
+                .into(binding.ivProfileImage2);
 
         //TODO: make the buttons work
+        binding.btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                twitterUserFunctions.toggleFavorite(binding.btnFavorite,binding.tvFavoriteCounter);
+            }
+        });
+        binding.btnReTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                twitterUserFunctions.toggleReTweet(binding.btnReTweet,binding.tvRetweetCounter);
+            }
+        });
     }
 
     @Override
