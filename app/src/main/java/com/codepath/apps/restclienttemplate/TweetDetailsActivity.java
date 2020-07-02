@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.Headers;
 
 public class TweetDetailsActivity extends AppCompatActivity implements ComposeDialog.onSubmitListener{
+
 
 
     ActivityTweetDetailsBinding binding;
@@ -146,8 +148,20 @@ public class TweetDetailsActivity extends AppCompatActivity implements ComposeDi
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     Tweet newTweet = Tweet.fromJson(jsonObject);
-//                    tweets.add(0,newTweet);
-//                    tweetsAdapter.notifyDataSetChanged();
+
+                    // create and intent to be able to put in the new tweet
+                    Intent intent =  new Intent();
+
+                    //pass the data
+                    intent.putExtra("newTweet",Parcels.wrap(newTweet));
+                    //set the result of the intent
+                    setResult(RESULT_OK,intent);
+
+                    //finish activity, close the screen and go back
+                    finish();
+
+                    composeDialog.dismiss();
+                    Snackbar.make(binding.detailsActivityContainer, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -160,7 +174,6 @@ public class TweetDetailsActivity extends AppCompatActivity implements ComposeDi
                 Log.e(TAG, "Failure to post tweet " + response,throwable );
             }
         },body,tweet.getId());
-        composeDialog.dismiss();
-        Snackbar.make(binding.detailsActivityContainer, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
+
     }
 }

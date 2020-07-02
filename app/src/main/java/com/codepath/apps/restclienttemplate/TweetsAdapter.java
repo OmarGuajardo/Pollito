@@ -41,20 +41,25 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public interface OnReplyListener{
         void onReplyListener(long tweetID, String userHandle);
     }
+    public interface OnTweetClickedListener{
+        void onTweetClickedListener(Tweet tweet,int position);
+    }
 
     private static final String TAG = "TweetsAdapter" ;
     Context context;
     List<Tweet> tweets;
     TwitterClient client;
     OnReplyListener replyListener;
+    OnTweetClickedListener onTweetClickedListener;
 
     // Pass context and list of tweets
-    public TweetsAdapter(Context context, List<Tweet> tweets, OnReplyListener onReplyListener) {
+    public TweetsAdapter(Context context, List<Tweet> tweets, OnReplyListener onReplyListener, OnTweetClickedListener onTweetClickedListener) {
         this.context = context;
         this.tweets = tweets;
         this.client = TwitterApp.getRestClient(context);
 
         this.replyListener = onReplyListener;
+        this.onTweetClickedListener = onTweetClickedListener;
     }
 
     // For each layout we inflate an item_tweet.xml
@@ -197,12 +202,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context,TweetDetailsActivity.class);
-                    intent.putExtra("tweetObject", Parcels.wrap(t));
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
-
-                    context.startActivity(intent,options.toBundle());
+//                    Intent intent = new Intent(context,TweetDetailsActivity.class);
+//                    intent.putExtra("tweetObject", Parcels.wrap(t));
+//                    ActivityOptionsCompat options = ActivityOptionsCompat.
+//                            makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
+//
+//                    context.startActivity(intent,options.toBundle());
+                    onTweetClickedListener.onTweetClickedListener(t,getPosition());
                 }
             });
 

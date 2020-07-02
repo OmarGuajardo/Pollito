@@ -1,11 +1,14 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -39,6 +43,11 @@ import java.util.TimerTask;
 import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeDialog.onSubmitListener {
+
+    public static final String KEY_ITEM_TWEET = "tweet";
+    public static final int EDIT_TEXT_CODE = 20;
+
+
 
     public final String TAG = "TimelineActivity";
     TwitterClient client;
@@ -101,13 +110,26 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             }
         };
 
+        TweetsAdapter.OnTweetClickedListener onTweetClickedListener  = new TweetsAdapter.OnTweetClickedListener(){
+            @Override
+            public void onTweetClickedListener(Tweet tweet,int position) {
+                Intent intent = new Intent(TimelineActivity.this,TweetDetailsActivity.class);
+                intent.putExtra("tweetObject", Parcels.wrap(tweet));
+//                View view = rvTweets.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.materialCardView);
+//                ActivityOptionsCompat options = ActivityOptionsCompat.
+//                        makeSceneTransitionAnimation((Activity) getApplicationContext(),rvTweets.findViewById(R.id.materialCardView), "detailsCard");
+
+                startActivityForResult(intent,EDIT_TEXT_CODE);
+            }
+        };
+
 
         //Initializing the client
         client = TwitterApp.getRestClient(this);
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        tweetsAdapter = new TweetsAdapter(this, tweets,onReplyListener);
+        tweetsAdapter = new TweetsAdapter(this, tweets,onReplyListener,onTweetClickedListener);
         rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(tweetsAdapter);
 
@@ -289,6 +311,17 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         composeDialog.dismiss();
         Snackbar.make(binding.mainContent, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: " + requestCode + " "+resultCode);
+        if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
+            Tweet receivedTweet = Parcels.unwrap(data.getParcelableExtra("newTweet"));
+            tweets.add(0,receivedTweet);
+            tweetsAdapter.notifyDataSetChanged();
+        }
     }
 
 }
