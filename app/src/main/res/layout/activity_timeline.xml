@@ -43,14 +43,14 @@
                 android:textStyle="bold" />
 
         </com.google.android.material.appbar.MaterialToolbar>
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:theme="@style/AppTheme"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/primaryColor"-->
-<!--            app:titleTextColor="@android:color/white"-->
-<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:theme="@style/AppTheme"-->
+        <!--            android:layout_height="?attr/actionBarSize"-->
+        <!--            android:background="@color/primaryColor"-->
+        <!--            app:titleTextColor="@android:color/white"-->
+        <!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
