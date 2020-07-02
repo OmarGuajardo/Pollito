@@ -12,7 +12,6 @@
         style="@style/CardView.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:transitionName="detailsCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,6 +38,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.appbar.MaterialToolbar
+                        android:transitionName="detailsToolBar"
                         android:id="@+id/tooolbarDetails"
                         style="@style/AppTheme"
                         android:layout_width="match_parent"
@@ -53,6 +53,7 @@
 
 
             <com.google.android.material.chip.Chip
+                android:transitionName="detailsChip"
                 android:id="@+id/tvRetweetStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvRetweetStatus">
 
                 <TextView
+                    android:transitionName="detailsName"
                     android:id="@+id/tvName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -111,6 +113,7 @@
 
 
                 <TextView
+                    android:transitionName="detailsTimeStamp"
                     android:id="@+id/tvTimesStamp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -127,6 +130,7 @@
 
 
             <TextView
+                android:transitionName="detailsHandle"
                 android:id="@+id/tvHandle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -153,6 +157,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvHandle">
 
                 <TextView
+                    android:transitionName="detailsBody"
                     android:id="@+id/tvBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,15 +176,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2" />
 
-                <!--                android:visibility="gone"-->
                 <ImageView
+                    android:transitionName="detailsBody"
                     android:id="@+id/ivTweetImage"
                     android:layout_width="300dp"
                     android:layout_height="200dp"
-
-
                     android:layout_gravity="center"
-
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -210,6 +212,7 @@
 
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:transitionName="detailsFavoriteCounter"
                             android:id="@+id/tvFavoriteCounter"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -219,6 +222,7 @@
                             tools:text="24" />
 
                         <ImageButton
+                            android:transitionName="detailsBtnFavorite"
                             android:id="@+id/btnFavorite"
                             style="@style/Widget.AppCompat.ImageButton"
                             android:layout_width="wrap_content"
@@ -236,6 +240,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:transitionName="detailsRetweetCounter"
                             android:id="@+id/tvRetweetCounter"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -245,6 +250,7 @@
                             tools:text="24" />
 
                         <ImageButton
+                            android:transitionName="detailsBtnRetweet"
                             android:id="@+id/btnReTweet"
                             style="@style/Widget.AppCompat.ImageButton"
                             android:layout_width="wrap_content"
@@ -262,6 +268,7 @@
 
 
                         <ImageButton
+                            android:transitionName="detailsBtnReply"
                             android:id="@+id/btnReply"
                             style="@style/Widget.AppCompat.ImageButton"
                             android:layout_width="wrap_content"

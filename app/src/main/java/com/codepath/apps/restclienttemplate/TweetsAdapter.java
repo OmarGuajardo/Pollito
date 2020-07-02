@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
@@ -112,6 +113,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvRetweetCounter;
         TextView tvFavoriteCounter;
         Chip tvRetweetStatus;
+        Toolbar toolbar;
         long tweetID;
         Tweet tweet;
 
@@ -129,6 +131,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             ivTweetImage = itemView.findViewById(R.id.ivTweetImage);
             tvRetweetStatus = itemView.findViewById(R.id.tvRetweetStatus);
 
+
             //Button Views
             btnFavorite = itemView.findViewById(R.id.btnFavorite);
             btnReTweet = itemView.findViewById(R.id.btnReTweet);
@@ -138,6 +141,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvRetweetCounter = itemView.findViewById(R.id.tvRetweetCounter);
             tvFavoriteCounter = itemView.findViewById(R.id.tvFavoriteCounter);
 
+            toolbar = itemView.findViewById(R.id.toolbar);
 
         }
 
@@ -171,7 +175,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvName.setText(tweet.getUser().getName());
             tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
             tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
-
             tweetID = tweet.getId();
             btnFavorite.setSelected(tweet.getFavorited());
             btnReTweet.setSelected(tweet.getRetweeted());
@@ -188,8 +191,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
                     Intent intent = new Intent(context,TweetDetailsActivity.class);
                     intent.putExtra("tweetObject", Parcels.wrap(t));
+
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
+
+
                     context.startActivity(intent,options.toBundle());
                 }
             });

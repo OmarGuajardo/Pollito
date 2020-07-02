@@ -23,6 +23,7 @@
 
         <!-- Toolbar is the actual app bar with text and the action items -->
         <com.google.android.material.appbar.MaterialToolbar
+            android:transitionName="detailsToolBar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme"
