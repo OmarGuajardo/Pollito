@@ -1,280 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/CardView.Light"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
+    android:background="@color/medium_gray_50"
+    android:layout_height="match_parent">
 
-    android:layout_marginBottom="8dp"
-    android:transitionName="detailsCard"
-    tools:ignore="ContentDescription">
+    <com.google.android.material.card.MaterialCardView
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ContstraintContainer"
-        style="@style/AppTheme"
+        style="@style/CardView.Light"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinatorLayout"
+        android:transitionName="detailsCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ContstraintContainer"
             style="@style/AppTheme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tvRetweetStatus"
-            app:layout_constraintTop_toTopOf="@+id/ContstraintContainer">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/coordinatorLayout"
+                style="@style/AppTheme"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/tvRetweetStatus"
+                app:layout_constraintTop_toTopOf="@+id/ContstraintContainer">
 
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/tooolbarDetails"
-                    style="@style/AppTheme"
+                <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/primaryColor"
-                    android:theme="@style/AppTheme"
-                    app:titleTextColor="@android:color/white">
 
-                </com.google.android.material.appbar.MaterialToolbar>
-            </com.google.android.material.appbar.AppBarLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/tooolbarDetails"
+                        style="@style/AppTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/primaryColor"
+                        android:theme="@style/AppTheme"
+                        app:titleTextColor="@android:color/white">
+
+                    </com.google.android.material.appbar.MaterialToolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tvRetweetStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="Test test"
-            android:textColor="@color/medium_gray"
-
-            android:textSize="12sp"
-            app:chipBackgroundColor="@android:color/white"
-            app:chipIcon="@drawable/ic_vector_retweet_stroke_chip"
-            app:chipIconSize="16dp"
-            app:chipIconTint="@color/medium_gray"
-            app:layout_constraintBottom_toTopOf="@id/ivProfileImage2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
-
-        <ImageView
-            android:id="@+id/ivProfileImage2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:transitionName="detailsProfile"
-            android:layout_marginTop="12dp"
-            android:padding="4dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRetweetStatus"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:srcCompat="@tools:sample/avatars" />
-        <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
-
-        <LinearLayout
-            android:id="@+id/linearLayoutTop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
-            app:layout_constraintTop_toBottomOf="@+id/tvRetweetStatus">
-
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/tvRetweetStatus"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:fontFamily="sans-serif-black"
-                android:text="Justice for Eliajias Mcdonald the third"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Test test"
+                android:textColor="@color/medium_gray"
 
-
-            <TextView
-                android:id="@+id/tvTimesStamp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="right"
-                android:lines="1"
-                android:text="2h"
-                android:textAlignment="viewEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/cardview_dark_background" />
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tvHandle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="sans-serif"
-            android:text="subhead"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/primaryLightColor"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toTopOf="@id/linearLayoutMid"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTop" />
-
-
-        <LinearLayout
-            android:id="@+id/linearLayoutMid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tvHandle">
-
-            <TextView
-                android:id="@+id/tvBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:autoLink="all"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:lineSpacingExtra="8dp"
-                android:linksClickable="true"
-                android:padding="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/cardview_dark_background"
-                app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"
+                android:textSize="12sp"
+                app:chipBackgroundColor="@android:color/white"
+                app:chipIcon="@drawable/ic_vector_retweet_stroke_chip"
+                app:chipIconSize="16dp"
+                app:chipIconTint="@color/medium_gray"
+                app:layout_constraintBottom_toTopOf="@id/ivProfileImage2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2" />
+                app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
-            <!--                android:visibility="gone"-->
             <ImageView
-                android:id="@+id/ivTweetImage"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
-
-
-                android:layout_gravity="center"
-
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/ivProfileImage2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:padding="4dp"
+                android:scaleType="centerCrop"
+                android:transitionName="detailsProfile"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintTop_toBottomOf="@id/tvRetweetStatus"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:srcCompat="@tools:sample/avatars" />
+            <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
 
             <LinearLayout
-                android:id="@+id/ButtonContainer"
-                android:layout_width="match_parent"
-
+                android:id="@+id/linearLayoutTop"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="right"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                app:layout_constraintRight_toRightOf="@id/ContstraintContainer"
-                app:layout_constraintStart_toStartOf="@id/ContstraintContainer"
-                app:layout_constraintTop_toBottomOf="@id/tvBody">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
+                app:layout_constraintTop_toBottomOf="@+id/tvRetweetStatus">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-
-                    android:orientation="horizontal">
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvFavoriteCounter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="3dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        tools:text="24" />
-
-                    <ImageButton
-                        android:id="@+id/btnFavorite"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?actionBarItemBackground"
-                        android:minWidth="0dp"
-                        android:padding="8dp"
-                        android:src="@drawable/state_favorite"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvRetweetCounter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="3dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        tools:text="24" />
-
-                    <ImageButton
-                        android:id="@+id/btnReTweet"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?actionBarItemBackground"
-                        android:minWidth="0dp"
-                        android:padding="8dp"
-                        android:src="@drawable/state_retweet" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="5"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Justice for Eliajias Mcdonald the third"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
 
-                    <ImageButton
-                        android:id="@+id/btnReply"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?actionBarItemBackground"
-                        android:minWidth="0dp"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_vector_messages_stroke" />
-                </LinearLayout>
-
+                <TextView
+                    android:id="@+id/tvTimesStamp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:text="2h"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/cardview_dark_background" />
 
             </LinearLayout>
 
-        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvHandle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="sans-serif"
+                android:text="subhead"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/primaryLightColor"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutMid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutTop" />
 
-</com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tvHandle">
+
+                <TextView
+                    android:id="@+id/tvBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:autoLink="all"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:lineSpacingExtra="8dp"
+                    android:linksClickable="true"
+                    android:padding="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/cardview_dark_background"
+                    app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2" />
+
+                <!--                android:visibility="gone"-->
+                <ImageView
+                    android:id="@+id/ivTweetImage"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+
+
+                    android:layout_gravity="center"
+
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivProfileImage2"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <LinearLayout
+                    android:id="@+id/ButtonContainer"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintRight_toRightOf="@id/ContstraintContainer"
+                    app:layout_constraintStart_toStartOf="@id/ContstraintContainer"
+                    app:layout_constraintTop_toBottomOf="@id/tvBody">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
+
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvFavoriteCounter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="3dp"
+                            android:gravity="center"
+                            android:inputType="number"
+                            tools:text="24" />
+
+                        <ImageButton
+                            android:id="@+id/btnFavorite"
+                            style="@style/Widget.AppCompat.ImageButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?actionBarItemBackground"
+                            android:minWidth="0dp"
+                            android:padding="8dp"
+                            android:src="@drawable/state_favorite" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvRetweetCounter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="3dp"
+                            android:gravity="center"
+                            android:inputType="number"
+                            tools:text="24" />
+
+                        <ImageButton
+                            android:id="@+id/btnReTweet"
+                            style="@style/Widget.AppCompat.ImageButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?actionBarItemBackground"
+                            android:minWidth="0dp"
+                            android:padding="8dp"
+                            android:src="@drawable/state_retweet" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <ImageButton
+                            android:id="@+id/btnReply"
+                            style="@style/Widget.AppCompat.ImageButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?actionBarItemBackground"
+                            android:minWidth="0dp"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_vector_messages_stroke" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
