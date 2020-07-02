@@ -197,7 +197,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context,TweetDetailsActivity.class);
-                    intent.putExtra("tweetObject", Parcels.wrap(tweet));
+                    intent.putExtra("tweetObject", Parcels.wrap(t));
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
                     context.startActivity(intent,options.toBundle());
