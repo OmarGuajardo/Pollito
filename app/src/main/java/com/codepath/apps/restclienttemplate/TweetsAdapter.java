@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Entity;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -116,6 +118,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         Toolbar toolbar;
         long tweetID;
         Tweet tweet;
+        CardView cardView;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -142,6 +145,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvFavoriteCounter = itemView.findViewById(R.id.tvFavoriteCounter);
 
             toolbar = itemView.findViewById(R.id.toolbar);
+            cardView = itemView.findViewById(R.id.materialCardView);
 
         }
 
@@ -192,8 +196,23 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     Intent intent = new Intent(context,TweetDetailsActivity.class);
                     intent.putExtra("tweetObject", Parcels.wrap(t));
 
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
+                    Pair[] pairs = new Pair[13];
+                    pairs[0] = new Pair<View, String>(cardView,"detailsCard");
+                    pairs[1] = new Pair<View, String>(tvRetweetStatus,"detailsChip");
+                    pairs[2] = new Pair<View, String>(ivProfileImage,"detailsProfile");
+                    pairs[3] = new Pair<View, String>(tvName,"detailsName");
+                    pairs[4] = new Pair<View, String>(tvTimeStamp,"detailsTimeStamp");
+                    pairs[5] = new Pair<View, String>(tvHandle,"detailsHandle");
+                    pairs[6] = new Pair<View, String>(tvBody,"detailsBody");
+                    pairs[7] = new Pair<View, String>(ivTweetImage,"detailsTweetImage");
+                    pairs[8] = new Pair<View, String>(btnFavorite,"detailsBtnFavorite");
+                    pairs[9] = new Pair<View, String>(tvFavoriteCounter,"detailsFavoriteCounter");
+                    pairs[10] = new Pair<View, String>(tvRetweetCounter,"detailsRetweetCounter");
+                    pairs[11] = new Pair<View, String>(btnReTweet,"detailsBtnRetweet");
+                    pairs[12] = new Pair<View, String>(btnReply,"detailsBtnReply");
+
+                    ActivityOptions options = ActivityOptions.
+                            makeSceneTransitionAnimation((Activity)context,pairs);
 
 
                     context.startActivity(intent,options.toBundle());
