@@ -47,7 +47,7 @@ public class ComposeDialog extends AppCompatDialogFragment {
         btnTweet = view.findViewById(R.id.btnTweet);
         Bundle mArgs = getArguments();
 
-        if(mArgs == null){
+        if(mArgs != null){
             userHandle= mArgs.getString("userHandle");
             tweetID= mArgs.getLong("tweetID");
             Log.d(TAG, "onCreateDialog: this is what I get for userHandle " +userHandle);

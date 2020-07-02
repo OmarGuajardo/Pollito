@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -221,7 +223,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 }
 
                 Log.d(TAG, "Successfully posted a tweet " + json.toString());
-                composeDialog.dismiss();
+
             }
 
             @Override
@@ -229,6 +231,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 Log.e(TAG, "Failure to post tweet " + response,throwable );
             }
         },body);
+        composeDialog.dismiss();
+        Snackbar.make(binding.mainContent, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
+
     }
     //Method that handles that takes in the compose body and make a POST request to the client
     @Override
@@ -247,7 +252,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 }
 
                 Log.d(TAG, "Successfully posted a tweet " + json.toString());
-                composeDialog.dismiss();
             }
 
             @Override
@@ -255,6 +259,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 Log.e(TAG, "Failure to post tweet " + response,throwable );
             }
         },body,tweetID);
+        composeDialog.dismiss();
+        Snackbar.make(binding.mainContent, R.string.snackbar_text, Snackbar.LENGTH_SHORT).show();
+
     }
 
 }
