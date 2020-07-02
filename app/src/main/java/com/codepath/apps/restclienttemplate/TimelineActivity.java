@@ -85,6 +85,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                         donutProgress.setProgress(donutProgress.getProgress() + 1);
                         if(donutProgress.getProgress() == 100){
                             binding.rvTweets.setVisibility(View.VISIBLE);
+                            donutProgress.setVisibility(View.INVISIBLE);
+                            cancel();
                         }
                     }
                 });
@@ -108,7 +110,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        tweetsAdapter = new TweetsAdapter(this, tweets,client,onReplyListener);
+        tweetsAdapter = new TweetsAdapter(this, tweets,onReplyListener);
         rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(tweetsAdapter);
 

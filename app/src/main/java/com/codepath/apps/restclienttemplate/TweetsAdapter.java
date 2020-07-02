@@ -46,10 +46,11 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     OnReplyListener replyListener;
 
     // Pass context and list of tweets
-    public TweetsAdapter(Context context, List<Tweet> tweets,TwitterClient client, OnReplyListener onReplyListener) {
+    public TweetsAdapter(Context context, List<Tweet> tweets, OnReplyListener onReplyListener) {
         this.context = context;
         this.tweets = tweets;
-        this.client = client;
+        this.client = TwitterApp.getRestClient(context);
+
         this.replyListener = onReplyListener;
     }
 
