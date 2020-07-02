@@ -30,12 +30,14 @@ public class Tweet{
     public Tweet attachedReTweet;
 
 
-
-    public long getId() {
-        return id;
+    //Main Setters
+    public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
+        List<Tweet> tweets = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            tweets.add(fromJson(jsonArray.getJSONObject(i)));
+        }
+        return tweets;
     }
-
-
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -62,21 +64,7 @@ public class Tweet{
         return tweet;
     }
 
-    public Tweet getAttachedReTweet() {
-        return attachedReTweet;
-    }
-
-
-    public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{
-        List<Tweet> tweets = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            tweets.add(fromJson(jsonArray.getJSONObject(i)));
-        }
-        return tweets;
-    }
-
-
-
+    //Setters
     public void changeFavorite_count(int favorite_count) {
         this.favorite_count = this.favorite_count + favorite_count;
     }
@@ -92,7 +80,10 @@ public class Tweet{
     public void toggleRetweeted() {
         retweeted = !retweeted;
     }
+
+    //Getters
     public int getFavorite_count() { return favorite_count; }
+
     public int getRetweet_count() {
         return retweet_count;
     }
@@ -104,22 +95,9 @@ public class Tweet{
     public Boolean getRetweeted() {
         return retweeted;
     }
+
     public String getTweetImageURL() {
         return this.tweetImageURL;
-    }
-
-
-
-    public static String extractMedia(JSONObject jsonObject){
-        String tweetImageURL = "";
-        try {
-            JSONArray array = jsonObject.getJSONObject("extended_entities").getJSONArray("media");
-            tweetImageURL = array.getJSONObject(0).getString("media_url_https");
-            Log.d("Tweet.java", "extractMedia: sucess here is the url  " + tweetImageURL);
-        } catch (JSONException e) {
-            Log.e("Tweet.java", "extractMedia: failed  " + e.toString());
-        }
-        return tweetImageURL;
     }
 
     public String getBody() {
@@ -162,6 +140,16 @@ public class Tweet{
         return user;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public Tweet getAttachedReTweet() {
+        return attachedReTweet;
+    }
+
+
+    //Helper Methods
     public String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
@@ -179,7 +167,17 @@ public class Tweet{
         return relativeDate;
     }
 
-
+    public static String extractMedia(JSONObject jsonObject){
+        String tweetImageURL = "";
+        try {
+            JSONArray array = jsonObject.getJSONObject("extended_entities").getJSONArray("media");
+            tweetImageURL = array.getJSONObject(0).getString("media_url_https");
+            Log.d("Tweet.java", "extractMedia: sucess here is the url  " + tweetImageURL);
+        } catch (JSONException e) {
+            Log.e("Tweet.java", "extractMedia: failed  " + e.toString());
+        }
+        return tweetImageURL;
+    }
 
 
 

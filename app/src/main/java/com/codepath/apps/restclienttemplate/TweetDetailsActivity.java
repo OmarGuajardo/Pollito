@@ -27,7 +27,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         binding = ActivityTweetDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Tweet tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetObject"));
-        Tweet originalTweet = new Tweet();
+        Tweet originalTweet;
 
         setSupportActionBar(binding.tooolbarDetails);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

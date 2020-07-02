@@ -45,8 +45,9 @@ public class ComposeDialog extends AppCompatDialogFragment {
         etComposeBody = view.findViewById(R.id.etComposeBody);
         etComposeBodyContainer = view.findViewById(R.id.etComposeBodyContainer);
         btnTweet = view.findViewById(R.id.btnTweet);
-        try {
-            Bundle mArgs = getArguments();
+        Bundle mArgs = getArguments();
+
+        if(mArgs == null){
             userHandle= mArgs.getString("userHandle");
             tweetID= mArgs.getLong("tweetID");
             Log.d(TAG, "onCreateDialog: this is what I get for userHandle " +userHandle);
@@ -59,8 +60,7 @@ public class ComposeDialog extends AppCompatDialogFragment {
                     listener.submitTweet("@"+userHandle+" "+etComposeBody.getText().toString(),tweetID);
                 }
             });
-        } catch (Exception e) {
-
+        }else {
             Log.d(TAG, "onCreateDialog: no argumetns passed ");
             btnTweet.setOnClickListener(new View.OnClickListener() {
                 @Override

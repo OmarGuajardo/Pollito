@@ -51,14 +51,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         binding = ActivityTimelineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         // Find the toolbar view inside the activity layout
-
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(binding.toolbar);
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        TextView mTitle = (TextView) binding.toolbar.findViewById(R.id.toolbar_title);
 
 
         //Getting the Views
@@ -66,6 +62,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         tweets = new ArrayList<>();
 
 
+
+        //Method that will be passed down to the adapter to be able to reply
         TweetsAdapter.OnReplyListener onReplyListener = new TweetsAdapter.OnReplyListener() {
             @Override
             public void onReplyListener(long tweetID, String userHandle) {
@@ -89,10 +87,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         binding.fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TimelineActivity.this,TweetDetailsActivity.class);
-                intent.putExtra("tweetObject", Parcels.wrap(tweets.get(0)));
-                startActivity(intent);
-//                openDialog();
+                openDialog();
             }
         });
 
@@ -104,7 +99,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 populateHomeTimeLine();
             }
         });
-//         Configure the refreshing colors
+
+        //Configure the refreshing colors
         binding.refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -128,6 +124,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
 
     }
+
+    //This dialog method will be called by the onReply feature
+    //will PASS the recipients information to the dialog
     public void openDialog(long tweetID, String userHandle) {
         //Creating an opening a new Dialog
         composeDialog = new ComposeDialog();
@@ -137,6 +136,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         composeDialog.setArguments(args);
         composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
     }
+
+    //This dialog method will be called by the compose feature and WON'T pass
+    //any recipients to the dialog
     public void openDialog() {
         //Creating an opening a new Dialog
         composeDialog = new ComposeDialog();
@@ -202,7 +204,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     }
 
 
-    //Method that handles that takes in the compose body and make a POST request to the client
+    //Method that handles the submission by the dialog screen
     @Override
     public void submitTweet(String body) {
         Log.d(TAG, "submitted the following tweet " + body);
@@ -254,4 +256,5 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             }
         },body,tweetID);
     }
+
 }
