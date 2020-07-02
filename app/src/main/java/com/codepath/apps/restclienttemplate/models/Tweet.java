@@ -80,6 +80,22 @@ public class Tweet{
         return favorite_count;
     }
 
+    public void changeFavorite_count(int favorite_count) {
+        this.favorite_count = this.favorite_count + favorite_count;
+    }
+
+    public void changeRetweet_count(int retweet_count) {
+        this.retweet_count = this.retweet_count - retweet_count;
+    }
+
+    public void toggleFavorited() {
+        this.favorited = !this.favorited;
+    }
+
+    public void toggleRetweeted() {
+        this.retweeted = !this.retweeted;
+    }
+
     public int getRetweet_count() {
         return retweet_count;
     }

@@ -43,7 +43,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
             binding.tvRetweetStatus.setVisibility(View.GONE);
         }
         if(!tweet.getTweetImageURL().isEmpty()){
-            Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
             binding.ivTweetImage.setVisibility(View.VISIBLE);
             Glide.with(getApplicationContext())
                     .load(tweet.getTweetImageURL())
