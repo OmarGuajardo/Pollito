@@ -20,14 +20,37 @@
         android:theme="@style/AppTheme">
 
         <!-- Toolbar is the actual app bar with text and the action items -->
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primaryColor"
             app:titleTextColor="@android:color/white"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:letterSpacing="0.1"
+                android:text="Pollito"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:theme="@style/AppTheme"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/primaryColor"-->
+<!--            app:titleTextColor="@android:color/white"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

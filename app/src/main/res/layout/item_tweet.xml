@@ -17,21 +17,23 @@
         android:id="@+id/ContstraintContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg1">
+        >
 
-        <TextView
+
+        <com.google.android.material.chip.Chip
             android:id="@+id/tvRetweetStatus"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:layout_weight="2"
-            android:fontFamily="sans-serif-light"
-            android:text="rewteet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="10sp" />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:chipIcon="@drawable/ic_vector_retweet_stroke_chip"
+            app:chipIconTint="@color/medium_gray"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Test test"
+            app:chipIconSize="16dp"
+            android:textSize="12sp"
+            app:chipBackgroundColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/ivProfileImage2"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/ivProfileImage2"
@@ -42,7 +44,7 @@
             android:padding="4dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvRetweetStatus"
             app:layout_constraintVertical_chainStyle="packed" />
         <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
 
@@ -163,12 +165,13 @@
             <LinearLayout
                 android:id="@+id/ButtonContainer"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="right"
                 android:orientation="horizontal"
-                android:padding="4dp"
+                android:padding="8dp"
                 app:layout_constraintRight_toRightOf="@id/ContstraintContainer"
                 app:layout_constraintStart_toStartOf="@id/ContstraintContainer"
                 app:layout_constraintTop_toBottomOf="@id/tvBody">
@@ -180,11 +183,14 @@
 
                     android:orientation="horizontal">
 
+
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvFavoriteCounter"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
                         android:gravity="center"
+                        android:inputType="number"
                         tools:text="24" />
 
                     <ImageButton
@@ -192,11 +198,15 @@
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?android:attr/selectableItemBackground"
                         android:minWidth="0dp"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_vector_heart_stroke" />
+                        android:background="?actionBarItemBackground"
+
+                        android:padding="8dp"
+                        android:src="@drawable/state_favorite"
+
+                        />
                 </LinearLayout>
+<!--                        android:background="?android:attr/selectableItemBackground"-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -208,7 +218,9 @@
                         android:id="@+id/tvRetweetCounter"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
                         android:gravity="center"
+                        android:inputType="number"
                         tools:text="24" />
 
                     <ImageButton
@@ -216,9 +228,9 @@
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?android:attr/selectableItemBackground"
                         android:minWidth="0dp"
-                        android:padding="4dp"
+                        android:padding="8dp"
+                        android:background="?actionBarItemBackground"
                         android:src="@drawable/ic_vector_retweet_stroke" />
                 </LinearLayout>
 
@@ -233,10 +245,9 @@
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?android:attr/selectableItemBackground"
-
+                        android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
-                        android:padding="4dp"
+                        android:padding="8dp"
                         android:src="@drawable/ic_vector_messages_stroke" />
                 </LinearLayout>
 

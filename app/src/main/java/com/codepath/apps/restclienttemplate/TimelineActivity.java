@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -52,6 +53,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(binding.toolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        TextView mTitle = (TextView) binding.toolbar.findViewById(R.id.toolbar_title);
+
+
         //Getting the Views
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();

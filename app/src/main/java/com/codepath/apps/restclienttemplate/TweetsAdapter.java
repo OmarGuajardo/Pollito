@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.databinding.ItemTweetBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.chip.Chip;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,7 +105,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivTweetImage;
         TextView tvRetweetCounter;
         TextView tvFavoriteCounter;
-        TextView tvRetweetStatus;
+        Chip tvRetweetStatus;
 
         Boolean favoriteStatus;
         Boolean reTweetStatus;
@@ -166,7 +167,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             if(tweet.getFavorited()){
                 btnFavorite.setImageResource(R.drawable.ic_vector_heart_stroke);
             }if(tweet.getRetweeted()){
-                btnReTweet.setImageResource(R.drawable.ic_vector_retweet);
+                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke_selected);
             }
             if(!tweet.getTweetImageURL().isEmpty()){
                 Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
@@ -206,7 +207,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
                     Log.d(TAG, "doing something with this id "+tweetID);
                     if(favoriteStatus){
-                        btnFavorite.setImageResource(R.drawable.ic_vector_heart_stroke);
+                        btnFavorite.setSelected(false);
                         action = "destroy";
                         Log.d(TAG, "destroying favorite");
                         client.favoriteTweet(new JsonHttpResponseHandler() {
@@ -224,7 +225,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         },tweetID,action);
                     }
                     else{
-                        btnFavorite.setImageResource(R.drawable.ic_vector_heart);
+                        btnFavorite.setSelected(true);
                         action = "create";
                         Log.d(TAG, "creating favorite");
                         client.favoriteTweet(new JsonHttpResponseHandler() {
@@ -280,7 +281,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
                                 tvRetweetCounter.setText(String.valueOf(retweetCounter+1));
                                 retweetCounter++;
-                                btnReTweet.setImageResource(R.drawable.ic_vector_retweet);
+                                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke_selected);
                                 Log.d(TAG, "You retweet a tweet sucess! ");
                             }
 
