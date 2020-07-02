@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:padding="8dp"
     style="@style/AppTheme"
-    android:background="@drawable/dialog_bg"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -17,17 +16,9 @@
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Compose"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textContainer"
-            style="@style/AppTheme"
+            android:id="@+id/etComposeBodyContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primaryColor"
@@ -36,6 +27,7 @@
             android:textColorHint="@color/primaryColor"
             app:boxStrokeColor="@color/primaryColor"
             app:counterEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:counterMaxLength="280"
             app:endIconTint="@color/primaryColor"
             app:hintTextColor="@color/primaryColor"
@@ -47,11 +39,9 @@
                 android:layout_width="match_parent"
                 android:textCursorDrawable="@null"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/primaryTextColor"
                 android:hint="What's Popping?"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="280"
-                android:minHeight="150dp"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
                 android:textSize="20sp" />

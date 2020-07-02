@@ -6,12 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -21,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,16 +55,24 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
-        binding.toolbar.setTitleTextColor(getResources().getColor(R.color.primaryTextColor));
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        TextView mTitle = (TextView) binding.toolbar.findViewById(R.id.toolbar_title);
+
 
         //Getting the Views
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
 
 
-
-
+        TweetsAdapter.OnReplyListener onReplyListener = new TweetsAdapter.OnReplyListener() {
+            @Override
+            public void onReplyListener(long tweetID, String userHandle) {
+                Log.d(TAG, "onReplyListener: " + tweetID + userHandle);
+                openDialog(tweetID ,userHandle );
+            }
+        };
 
 
         //Initializing the client
@@ -66,7 +80,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        tweetsAdapter = new TweetsAdapter(this, tweets,client);
+        tweetsAdapter = new TweetsAdapter(this, tweets,client,onReplyListener);
         rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(tweetsAdapter);
 
@@ -75,7 +89,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         binding.fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog();
+                Intent intent = new Intent(TimelineActivity.this,TweetDetailsActivity.class);
+                intent.putExtra("tweetObject", Parcels.wrap(tweets.get(0)));
+                startActivity(intent);
+//                openDialog();
             }
         });
 
@@ -111,12 +128,18 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
 
     }
-    public void openDialog() {
+    public void openDialog(long tweetID, String userHandle) {
         //Creating an opening a new Dialog
         composeDialog = new ComposeDialog();
         Bundle args = new Bundle();
-        args.putString("name", "Omar");
+        args.putString("userHandle", userHandle);
+        args.putLong("tweetID", tweetID);
         composeDialog.setArguments(args);
+        composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
+    }
+    public void openDialog() {
+        //Creating an opening a new Dialog
+        composeDialog = new ComposeDialog();
         composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
 
     }
@@ -204,5 +227,31 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 Log.e(TAG, "Failure to post tweet " + response,throwable );
             }
         },body);
+    }
+    //Method that handles that takes in the compose body and make a POST request to the client
+    @Override
+    public void submitTweet(String body, long tweetID) {
+        Log.d(TAG, "submitted the following tweet " + body);
+        client.postTweet(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    Tweet newTweet = Tweet.fromJson(jsonObject);
+                    tweets.add(0,newTweet);
+                    tweetsAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG, "Successfully posted a tweet " + json.toString());
+                composeDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "Failure to post tweet " + response,throwable );
+            }
+        },body,tweetID);
     }
 }

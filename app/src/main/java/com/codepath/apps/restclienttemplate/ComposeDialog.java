@@ -3,12 +3,14 @@ package com.codepath.apps.restclienttemplate;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,12 +18,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class ComposeDialog extends AppCompatDialogFragment {
 
     public String TAG = "ComposeDialog";
-    public EditText etComposeBody;
+    public TextInputLayout etComposeBodyContainer;
+    public TextInputEditText etComposeBody;
     public onSubmitListener listener;
     public Button btnTweet;
+    public String userHandle;
+    public long tweetID;
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -32,19 +42,36 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
 
-        Bundle mArgs = getArguments();
-        String name = mArgs.getString("name");
-        Log.d(TAG, "onCreateDialog: this is what I get for name " +name);
-
         etComposeBody = view.findViewById(R.id.etComposeBody);
+        etComposeBodyContainer = view.findViewById(R.id.etComposeBodyContainer);
         btnTweet = view.findViewById(R.id.btnTweet);
+        try {
+            Bundle mArgs = getArguments();
+            userHandle= mArgs.getString("userHandle");
+            tweetID= mArgs.getLong("tweetID");
+            Log.d(TAG, "onCreateDialog: this is what I get for userHandle " +userHandle);
+            Log.d(TAG, "onCreateDialog: this is what I get for tweetID " +tweetID);
+            etComposeBodyContainer.setHint("Replying to @"+userHandle);
+            etComposeBody.requestFocus();
+            btnTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.submitTweet("@"+userHandle+" "+etComposeBody.getText().toString(),tweetID);
+                }
+            });
+        } catch (Exception e) {
 
-        btnTweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.submitTweet(etComposeBody.getText().toString());
-            }
-        });
+            Log.d(TAG, "onCreateDialog: no argumetns passed ");
+            btnTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.submitTweet(etComposeBody.getText().toString());
+                }
+            });
+        }
+
+
+
         return builder.create();
     };
 
@@ -62,5 +89,6 @@ public class ComposeDialog extends AppCompatDialogFragment {
 
     public interface onSubmitListener{
         void submitTweet(String body);
+        void submitTweet(String body,long ID);
     }
 }

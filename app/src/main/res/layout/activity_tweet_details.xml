@@ -1,25 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?attr/cardMaxElevation"
-    app:strokeWidth="1dp"
-    app:strokeColor="@color/cardview_light_background"
-    app:cardElevation="5dp"
+    style="@style/CardView.Light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:id="@+id/materialCardView"
+
     android:layout_marginBottom="8dp"
     android:transitionName="detailsCard"
     tools:ignore="ContentDescription">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ContstraintContainer"
+        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvRetweetStatus"
+            app:layout_constraintTop_toTopOf="@+id/ContstraintContainer">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/tooolbarDetails"
+                    style="@style/AppTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/primaryColor"
+                    android:theme="@style/AppTheme"
+                    app:titleTextColor="@android:color/white">
+
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
         <com.google.android.material.chip.Chip
@@ -30,26 +57,27 @@
             android:fontFamily="sans-serif-condensed-light"
             android:text="Test test"
             android:textColor="@color/medium_gray"
+
             android:textSize="12sp"
-            android:transitionName="detailsChip"
             app:chipBackgroundColor="@android:color/white"
             app:chipIcon="@drawable/ic_vector_retweet_stroke_chip"
             app:chipIconSize="16dp"
             app:chipIconTint="@color/medium_gray"
             app:layout_constraintBottom_toTopOf="@id/ivProfileImage2"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
         <ImageView
             android:id="@+id/ivProfileImage2"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:transitionName="detailsProfile"
+            android:layout_marginTop="12dp"
             android:padding="4dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvRetweetStatus"
+            app:layout_constraintTop_toBottomOf="@id/tvRetweetStatus"
             app:layout_constraintVertical_chainStyle="packed"
             tools:srcCompat="@tools:sample/avatars" />
         <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
@@ -64,7 +92,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
-            app:layout_constraintTop_toTopOf="@+id/ivProfileImage2">
+            app:layout_constraintTop_toBottomOf="@+id/tvRetweetStatus">
 
             <TextView
                 android:id="@+id/tvName"
@@ -123,7 +151,7 @@
 
             <TextView
                 android:id="@+id/tvBody"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
