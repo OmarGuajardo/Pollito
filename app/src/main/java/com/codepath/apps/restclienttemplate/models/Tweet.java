@@ -85,7 +85,7 @@ public class Tweet{
     }
 
     public void changeRetweet_count(int retweet_count) {
-        this.retweet_count = this.retweet_count - retweet_count;
+        this.retweet_count = this.retweet_count + retweet_count;
     }
 
     public void toggleFavorited() {

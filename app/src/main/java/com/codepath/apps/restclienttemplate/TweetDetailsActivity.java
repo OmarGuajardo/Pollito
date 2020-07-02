@@ -32,6 +32,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         setSupportActionBar(binding.tooolbarDetails);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().hide();
 
         if(tweet.getAttachedReTweet() != null){
             binding.tvRetweetStatus.setText("@"+tweet.getUser().getHandle());
@@ -72,7 +73,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
+            supportFinishAfterTransition();
         }
 
         return super.onOptionsItemSelected(item);

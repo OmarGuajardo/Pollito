@@ -29,6 +29,8 @@
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorControlHighlight">@color/primaryDarkColor</item>
 
+<!--        This will let me have smooth MDC transitions from timeline to details activity-->
+        <item name="android:windowContentTransitions">true</item>
 
 
     </style>
