@@ -67,21 +67,8 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("max_id", max_id);
 		client.get(apiUrl, params, handler);
 	}
-	public void postTweet(JsonHttpResponseHandler handler,String tweetBody) {
-		String apiUrl = getApiUrl("statuses/update.json");
-		// Can specify query string params directly or through RequestParams.
-		RequestParams params = new RequestParams();
-		params.put("status", tweetBody);
-		client.post(apiUrl,params,tweetBody,handler);
-	}
-	public void postTweet(JsonHttpResponseHandler handler,String tweetBody, long tweetID) {
-		String apiUrl = getApiUrl("statuses/update.json");
-		// Can specify query string params directly or through RequestParams.
-		RequestParams params = new RequestParams();
-		params.put("status", tweetBody);
-		params.put("in_reply_to_status_id", tweetID);
-		client.post(apiUrl,params,tweetBody,handler);
-	}
+
+	//Method will favorite tweet
 	public void favoriteTweet(JsonHttpResponseHandler handler,long tweetID, String action) {
 		String apiUrl = getApiUrl("favorites/"+action+".json");
 		// Can specify query string params directly or through RequestParams.
@@ -90,6 +77,8 @@ public class TwitterClient extends OAuthBaseClient {
 		String tweetIDString = String.valueOf(tweetID);
 		client.post(apiUrl,params,tweetIDString,handler);
 	}
+
+	//Method will retweet
 	public void reTweet(JsonHttpResponseHandler handler,long tweetID, String action) {
 		String apiUrl = getApiUrl("statuses/"+action+"/"+ tweetID +".json");
 		Log.d(TAG, "reTweet url + " + apiUrl);
@@ -100,15 +89,22 @@ public class TwitterClient extends OAuthBaseClient {
 		client.post(apiUrl,params,tweetIDString,handler);
 	}
 
-
-
-	public void getTweet(JsonHttpResponseHandler handler,long tweetID) {
-		String apiUrl = getApiUrl("statuses/show.json");
+	//This post tweet will tweet an original tweet
+	public void postTweet(JsonHttpResponseHandler handler,String tweetBody) {
+		String apiUrl = getApiUrl("statuses/update.json");
 		// Can specify query string params directly or through RequestParams.
 		RequestParams params = new RequestParams();
-		params.put("id", tweetID);
-		String tweetIDString = String.valueOf(tweetID);
-		client.post(apiUrl,params,tweetIDString,handler);
+		params.put("status", tweetBody);
+		client.post(apiUrl,params,tweetBody,handler);
+	}
+	//This post tweet will tweet in response to a selected tweet
+	public void postTweet(JsonHttpResponseHandler handler,String tweetBody, long tweetID) {
+		String apiUrl = getApiUrl("statuses/update.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("status", tweetBody);
+		params.put("in_reply_to_status_id", tweetID);
+		client.post(apiUrl,params,tweetBody,handler);
 	}
 
 
