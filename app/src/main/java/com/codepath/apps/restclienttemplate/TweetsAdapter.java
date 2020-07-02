@@ -103,6 +103,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        TwitterUserFunctions twitterUserFunctions;
         ImageView ivProfileImage;
         TextView tvHandle;
         TextView tvBody;
@@ -150,6 +151,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
 
         public void bind(final Tweet t) {
+
             if(t.getAttachedReTweet() != null) {
                 tvRetweetStatus.setText("@"+t.getUser().getHandle());
                 tweet = t.getAttachedReTweet();
@@ -159,6 +161,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 tweet = t;
                 tvRetweetStatus.setVisibility(View.GONE);
             }
+
+            twitterUserFunctions = new TwitterUserFunctions(context,tweet);
 
             if(!tweet.getTweetImageURL().isEmpty()){
                 Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
@@ -206,28 +210,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             btnFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    String action;
-                    final int toggleVal;
-                    action = (tweet.getFavorited() ? "destroy" : "create");
-                    toggleVal = (tweet.getFavorited() ? -1 : 1);
-                    client.favoriteTweet(new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Headers headers, JSON json) {
-                            tweet.changeFavorite_count(toggleVal);
-                            tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
-                            Log.d(TAG, "You favorite/unfavorited a tweet sucess! ");
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                            Log.e(TAG, "Failure to favorite/unfavorite tweet " + response,throwable );
-                        }
-                    },tweetID,action);
-                        tweet.toggleFavorited();
-                        btnFavorite.setSelected(tweet.getFavorited());
-
-
+                    twitterUserFunctions.toggleFavorite(btnFavorite,tvFavoriteCounter);
                 }
             });
 
@@ -236,27 +219,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
 
-                    String action;
-                    final int toggleVal;
-                    action = (tweet.getRetweeted() ? "retweet" : "unretweet");
-                    toggleVal= (tweet.getRetweeted() ? -1 : 1);
-
-                    client.reTweet(new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Headers headers, JSON json) {
-                            Log.d(TAG, "You retweeted/unretweeted a tweet sucess! ");
-                            tweet.changeRetweet_count(toggleVal);
-                            tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                            Log.e(TAG, "Failure to retweet/unretweed a tweet " + response,throwable );
-                        }
-                    },tweetID,action);
-
-                    tweet.toggleRetweeted();
-                    btnReTweet.setSelected(tweet.getRetweeted());
+                    twitterUserFunctions.toggleReTweet(btnReTweet,tvRetweetCounter);
 
                 }
 
