@@ -143,10 +143,7 @@
                 android:id="@+id/ivTweetImage"
                 android:layout_width="300dp"
                 android:layout_height="200dp"
-
-
                 android:layout_gravity="center"
-
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/btnFavorite"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +189,6 @@
                         android:layout_height="wrap_content"
                         android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
-
                         android:padding="8dp"
                         android:src="@drawable/state_favorite"
 
@@ -223,7 +219,7 @@
                         android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
                         android:padding="8dp"
-                        android:src="@drawable/ic_vector_retweet_stroke" />
+                        android:src="@drawable/state_retweet" />
                 </LinearLayout>
 
                 <LinearLayout

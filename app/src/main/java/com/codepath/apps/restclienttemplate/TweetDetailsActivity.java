@@ -53,22 +53,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
         else{
            binding.ivTweetImage.setVisibility(View.GONE);
         }
-        if(tweet.getFavorited()){
 
-            binding.btnFavorite.setSelected(true);
-        }
-        else{
-            binding.btnFavorite.setSelected(false);
-
-        }
-
-        if(tweet.getRetweeted()){
-            binding.btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke_selected);
-        }
-        else{
-            binding.btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
-
-        }
+        binding.btnFavorite.setSelected(tweet.getFavorited());
+        binding.btnReTweet.setSelected(tweet.getRetweeted());
 
         Glide.with(getApplicationContext())
                 .load(tweet.getUser().getProfileImageUrl())

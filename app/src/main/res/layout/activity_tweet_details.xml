@@ -222,13 +222,10 @@
                         android:layout_height="wrap_content"
                         android:background="?actionBarItemBackground"
                         android:minWidth="0dp"
-
                         android:padding="8dp"
-                        android:src="@drawable/state_favorite"
-
+                        android:src="@drawable/ic_vector_heart"
                         />
                 </LinearLayout>
-                <!--                        android:background="?android:attr/selectableItemBackground"-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"

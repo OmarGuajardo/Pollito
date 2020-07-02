@@ -150,31 +150,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 tweet = t;
                 tvRetweetStatus.setVisibility(View.GONE);
             }
-            tvTimeStamp.setText(tweet.getCreatedAt());
-            tvBody.setText(tweet.getBody());
-            tvHandle.setText("@"+tweet.getUser().getHandle());
-            tvName.setText(tweet.getUser().getName());
-            tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
-            tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
 
-            tweetID = tweet.getId();
-
-            if(tweet.getFavorited()){
-
-                btnFavorite.setSelected(true);
-            }
-            else{
-                btnFavorite.setSelected(false);
-
-            }
-
-            if(tweet.getRetweeted()){
-                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke_selected);
-            }
-            else{
-                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
-
-            }
             if(!tweet.getTweetImageURL().isEmpty()){
                 Log.d(TAG, "this is the image that is retrieved from tweet " + tweet.getTweetImageURL());
                 ivTweetImage.setVisibility(View.VISIBLE);
@@ -187,6 +163,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             else{
                 ivTweetImage.setVisibility(View.GONE);
             }
+
+            tvTimeStamp.setText(tweet.getCreatedAt());
+            tvBody.setText(tweet.getBody());
+            tvHandle.setText("@"+tweet.getUser().getHandle());
+            tvName.setText(tweet.getUser().getName());
+            tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
+            tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+
+            tweetID = tweet.getId();
+            btnFavorite.setSelected(tweet.getFavorited());
+            btnReTweet.setSelected(tweet.getRetweeted());
+
+
 
             Glide.with(context)
                     .load(tweet.getUser().getProfileImageUrl())
@@ -210,8 +199,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View view) {
 
                     String action;
-
                     Log.d(TAG, "doing something with this id "+tweetID);
+
                     if(tweet.getFavorited()){
                         btnFavorite.setSelected(false);
                         action = "destroy";
@@ -219,9 +208,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         client.favoriteTweet(new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                Log.d(TAG, "You unfavorited a tweet sucess! ");
-                                tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()-1));
                                 tweet.changeFavorite_count(-1);
+                                Log.d(TAG, "You unfavorited a tweet sucess! ");
                             }
 
                             @Override
@@ -237,7 +225,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         client.favoriteTweet(new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                                tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()+1));
                                 tweet.changeFavorite_count(1);
                                 Log.d(TAG, "You favorited a tweet sucess! ");
                             }
@@ -251,6 +238,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
                     }
                         tweet.toggleFavorited();
+                        btnFavorite.setSelected(tweet.getFavorited());
+                        tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
+
                 }
             });
 
@@ -268,8 +258,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
                                 Log.d(TAG, "You unrtweeted a tweet sucess! ");
-                                tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()-1));
-                                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
                                 tweet.changeRetweet_count(-1);
                             }
 
@@ -286,8 +274,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
                                 Log.d(TAG, "You retweet a tweet sucess! ");
-                                tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()+1));
-                                btnReTweet.setImageResource(R.drawable.ic_vector_retweet_stroke_selected);
                                 tweet.changeRetweet_count(1);
                             }
 
@@ -299,7 +285,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
 
                     }
-                        tweet.toggleRetweeted();
+                    tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
+                    tweet.toggleRetweeted();
+                        btnReTweet.setSelected(tweet.getRetweeted());
+
                 }
 
             });
