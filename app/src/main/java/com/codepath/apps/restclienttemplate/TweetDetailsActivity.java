@@ -70,6 +70,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         binding.tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
         binding.tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
 
+        //TODO: make the buttons work
     }
 
     @Override
