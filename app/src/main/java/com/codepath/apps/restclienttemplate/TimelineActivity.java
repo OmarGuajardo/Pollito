@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -32,6 +33,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Headers;
 
@@ -45,6 +48,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     EndlessRecyclerViewScrollListener scrollListener;
     ComposeDialog composeDialog;
     ActivityTimelineBinding binding;
+
+    DonutProgress donutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,29 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         //Getting the Views
         rvTweets = findViewById(R.id.rvTweets);
         tweets = new ArrayList<>();
+
+
+
+        Timer timer;
+        binding.rvTweets.setVisibility(View.INVISIBLE);
+        donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
+
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        donutProgress.setProgress(donutProgress.getProgress() + 1);
+                        if(donutProgress.getProgress() == 100){
+                            binding.rvTweets.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+            }
+        }, 10, 10);
 
 
 

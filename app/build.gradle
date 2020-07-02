@@ -77,6 +77,10 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.12'
 
 
+    //Progress View Bard
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
+
 
 
 }
