@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,11 +18,41 @@
     android:layout_marginBottom="8dp"
     tools:ignore="ContentDescription">
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ContstraintContainer"
         android:layout_width="match_parent"
+        style="@style/AppTheme"
         android:layout_height="wrap_content"
         >
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            style="@style/AppTheme"
+            app:layout_constraintTop_toTopOf="@+id/ContstraintContainer"
+            app:layout_constraintBottom_toTopOf="@+id/tvRetweetStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+                <com.google.android.material.appbar.MaterialToolbar
+                    style="@style/AppTheme"
+                    android:layout_width="match_parent"
+                    android:id="@+id/tooolbarDetails"
+                    android:theme="@style/AppTheme"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/primaryColor"
+                    app:titleTextColor="@android:color/white"
+                    >
+
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
         <com.google.android.material.chip.Chip
@@ -33,6 +68,7 @@
             app:chipIconSize="16dp"
             android:textSize="12sp"
             app:chipBackgroundColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout"
             app:layout_constraintBottom_toTopOf="@id/ivProfileImage2"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -45,7 +81,7 @@
             android:padding="4dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvRetweetStatus"
+            app:layout_constraintTop_toBottomOf="@id/tvRetweetStatus"
             app:layout_constraintVertical_chainStyle="packed"
             tools:srcCompat="@tools:sample/avatars" />
         <!--            app:layout_constraintBottom_toTopOf="@+id/ivTweetImage"-->
@@ -60,7 +96,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
-            app:layout_constraintTop_toTopOf="@+id/ivProfileImage2">
+            app:layout_constraintTop_toBottomOf="@+id/tvRetweetStatus">
 
             <TextView
                 android:id="@+id/tvName"
@@ -197,7 +233,7 @@
 
                         />
                 </LinearLayout>
-<!--                        android:background="?android:attr/selectableItemBackground"-->
+                <!--                        android:background="?android:attr/selectableItemBackground"-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"

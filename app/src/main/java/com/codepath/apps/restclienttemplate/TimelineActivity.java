@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         binding.fabCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog();
+                Intent intent = new Intent(TimelineActivity.this,TweetDetailsActivity.class);
+                intent.putExtra("tweetObject", Parcels.wrap(tweets.get(0)));
+                startActivity(intent);
+//                openDialog();
             }
         });
 
@@ -131,8 +136,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         args.putLong("tweetID", tweetID);
         composeDialog.setArguments(args);
         composeDialog.show(getSupportFragmentManager(), "Compose Dialog");
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.RESULT_SHOWN, 0);
     }
     public void openDialog() {
         //Creating an opening a new Dialog

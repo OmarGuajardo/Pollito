@@ -31,13 +31,6 @@ public class ComposeDialog extends AppCompatDialogFragment {
     public String userHandle;
     public long tweetID;
 
-    @Override
-    public void onDismiss(@NonNull DialogInterface dialog) {
-        //When the dialog is dismissed the
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
-        super.onDismiss(dialog);
-    }
 
     @NonNull
     @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Tweet {
+@Parcel
+public class Tweet{
     public String TAG = "Tweet.java";
     public String body;
     public String createdAt;

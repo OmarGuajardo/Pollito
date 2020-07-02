@@ -24,7 +24,7 @@
         <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="android:colorAccent">@color/primaryLightColor</item>
         <item name="extendedFloatingActionButtonStyle">@color/primaryTextColor</item>
-        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorControlHighlight">@color/primaryDarkColor</item>
