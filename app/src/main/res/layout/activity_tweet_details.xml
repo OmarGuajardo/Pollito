@@ -32,6 +32,8 @@
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/coordinatorLayout"
                 style="@style/AppTheme"
+                android:background="@color/primaryColor"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/tvRetweetStatus"
@@ -39,7 +41,7 @@
 
                 <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
-
+                    android:background="@color/primaryColor"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.appbar.MaterialToolbar

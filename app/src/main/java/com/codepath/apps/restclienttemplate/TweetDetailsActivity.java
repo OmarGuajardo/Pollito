@@ -21,6 +21,12 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     ActivityTweetDetailsBinding binding;
     String TAG = "TweetDetailsActivity";
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +83,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
+            getSupportActionBar().hide();
             supportFinishAfterTransition();
         }
 
