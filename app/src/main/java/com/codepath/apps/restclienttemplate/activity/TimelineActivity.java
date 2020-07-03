@@ -23,6 +23,7 @@ import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
 import com.codepath.apps.restclienttemplate.models.TweetWithUser;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.google.android.material.snackbar.Snackbar;
@@ -141,8 +142,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 List<Tweet>tweetsFromDB = TweetWithUser.getTweetList(tweetWithUsers);
                 tweetsAdapter.clear();
                 tweetsAdapter.addAll(tweetsFromDB);
+                binding.refreshLayout.setRefreshing(false);
+                binding.progressCircular.setVisibility(View.INVISIBLE);
+                binding.rvTweets.setVisibility(View.VISIBLE);
             }
         });
+
         //Fetching data and populating the timeline
         populateHomeTimeLine();
 
@@ -214,13 +219,25 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 Log.i(TAG, "onSuccess!");
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    List<Tweet> tweetsReceived = Tweet.fromJsonArray(jsonArray);
+                    final List<Tweet> tweetsFromNetwork = Tweet.fromJsonArray(jsonArray);
                     Log.d(TAG, "home time line received " + json.toString());
                     tweetsAdapter.clear();
-                    tweetsAdapter.addAll(tweetsReceived);
+                    tweetsAdapter.addAll(tweetsFromNetwork);
                     binding.refreshLayout.setRefreshing(false);
                     binding.progressCircular.setVisibility(View.INVISIBLE);
                     binding.rvTweets.setVisibility(View.VISIBLE);
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d(TAG, "Saving data to DB");
+                            List<User> usersFromNetwork = User.fromJsonTweetArray(tweetsFromNetwork);
+                            tweetDao.insertModel(usersFromNetwork.toArray(new User[0]));
+                            //insert users firsts
+
+                            //insert tweets
+                            tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet[0]));
+                        }
+                    });
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON exception", e);
                     e.printStackTrace();

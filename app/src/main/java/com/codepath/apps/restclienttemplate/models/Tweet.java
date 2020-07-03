@@ -44,7 +44,7 @@ public class Tweet{
     public Boolean favorited;
     @ColumnInfo
     public Boolean retweeted;
-//
+
 //    @ColumnInfo
 //    public Tweet attachedReTweet;
 
@@ -77,16 +77,17 @@ public class Tweet{
         tweet.retweeted = jsonObject.getBoolean("retweeted");
         User user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.user = user;
-        tweet.userID = user.userID;
-        try {
-            JSONObject jsonObject1 = jsonObject.getJSONObject("retweeted_status");
-            tweet.attachedReTweet =  Tweet.fromJson(jsonObject1);;
-            Log.d("Tweet.java", "this is a retweet here is the json " + jsonObject1.toString());
-        }
-        catch (JSONException e) {
-            tweet.attachedReTweet =  null;
-            Log.d("Tweet.java", "there is no retweet attached");
-        }
+        tweet.userID = user.id;
+
+//        try {
+//            JSONObject jsonObject1 = jsonObject.getJSONObject("retweeted_status");
+//            tweet.attachedReTweet =  Tweet.fromJson(jsonObject1);;
+//            Log.d("Tweet.java", "this is a retweet here is the json " + jsonObject1.toString());
+//        }
+//        catch (JSONException e) {
+//            tweet.attachedReTweet =  null;
+//            Log.d("Tweet.java", "there is no retweet attached");
+//        }
 
         return tweet;
     }
@@ -164,16 +165,16 @@ public class Tweet{
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public long getId() {
         return id;
     }
 
-    public Tweet getAttachedReTweet() {
-        return attachedReTweet;
-    }
+//    public Tweet getAttachedReTweet() {
+//        return attachedReTweet;
+//    }
 
 
     //Helper Methods

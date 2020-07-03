@@ -59,15 +59,15 @@ public class TweetDetailsActivity extends AppCompatActivity implements ComposeDi
         Tweet originalTweet;
 
         //Checking to see if the tweet is a retweet
-        if(tweet.getAttachedReTweet() != null){
-            binding.tvRetweetStatus.setText("@"+tweet.getUser().getHandle());
-            originalTweet = tweet;
-            tweet = originalTweet.getAttachedReTweet();
-            binding.tvRetweetStatus.setVisibility(View.VISIBLE);
-        }
-        else{
-            binding.tvRetweetStatus.setVisibility(View.GONE);
-        }
+//        if(tweet.getAttachedReTweet() != null){
+//            binding.tvRetweetStatus.setText("@"+tweet.getUser().getHandle());
+//            originalTweet = tweet;
+//            tweet = originalTweet.getAttachedReTweet();
+//            binding.tvRetweetStatus.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            binding.tvRetweetStatus.setVisibility(View.GONE);
+//        }
 
         //If there is no image in the tweet ivTweetImage will be hidden
         if(!tweet.getTweetImageURL().isEmpty()){

@@ -150,16 +150,17 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
 
         public void bind(final Tweet t) {
+            tweet = t;
 
-            if(t.getAttachedReTweet() != null) {
-                tvRetweetStatus.setText("@"+t.getUser().getHandle());
-                tweet = t.getAttachedReTweet();
-                tvRetweetStatus.setVisibility(View.VISIBLE);
-
-            } else  {
-                tweet = t;
-                tvRetweetStatus.setVisibility(View.GONE);
-            }
+//            if(t.getAttachedReTweet() != null) {
+//                tvRetweetStatus.setText("@"+t.getUser().getHandle());
+//                tweet = t.getAttachedReTweet();
+//                tvRetweetStatus.setVisibility(View.VISIBLE);
+//
+//            } else  {
+//                tweet = t;
+//                tvRetweetStatus.setVisibility(View.GONE);
+//            }
 
             twitterUserFunctions = new TwitterUserFunctions(context,tweet);
 
@@ -178,8 +179,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
             tvTimeStamp.setText(tweet.getCreatedAt());
             tvBody.setText(tweet.getBody());
-            tvHandle.setText("@"+tweet.getUser().getHandle());
-            tvName.setText(tweet.getUser().getName());
+            tvHandle.setText("@"+tweet.userID);
+            tvName.setText(tweet.user.getName());
             tvRetweetCounter.setText(String.valueOf(tweet.getRetweet_count()));
             tvFavoriteCounter.setText(String.valueOf(tweet.getFavorite_count()));
             tweetID = tweet.getId();
