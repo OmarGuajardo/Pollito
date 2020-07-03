@@ -1,10 +1,12 @@
-package com.codepath.apps.restclienttemplate;
+package com.codepath.apps.restclienttemplate.models;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.codepath.apps.restclienttemplate.TwitterApp;
+import com.codepath.apps.restclienttemplate.TwitterClient;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +21,8 @@ import com.codepath.apps.restclienttemplate.TwitterClient;
 import com.codepath.apps.restclienttemplate.adapters.TweetsAdapter;
 import com.codepath.apps.restclienttemplate.databinding.ActivityTimelineBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.TweetDao;
+import com.codepath.apps.restclienttemplate.models.TweetWithUser;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,7 +52,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     EndlessRecyclerViewScrollListener scrollListener;
     ComposeDialog composeDialog;
     ActivityTimelineBinding binding;
-
+    TweetDao tweetDao;
     DonutProgress donutProgress;
 
     @Override
@@ -58,6 +61,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         super.onCreate(savedInstanceState);
         binding = ActivityTimelineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+         tweetDao  = ((TwitterApp) getApplicationContext()).getMyDatabase().tweetDao();
+
+
         // Find the toolbar view inside the activity layout
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
@@ -124,6 +131,18 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+
+        //Query for existing Tweets in the DB
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "Showing data from DB");
+                List<TweetWithUser> tweetWithUsers = tweetDao.recentItems();
+                List<Tweet>tweetsFromDB = TweetWithUser.getTweetList(tweetWithUsers);
+                tweetsAdapter.clear();
+                tweetsAdapter.addAll(tweetsFromDB);
+            }
+        });
         //Fetching data and populating the timeline
         populateHomeTimeLine();
 

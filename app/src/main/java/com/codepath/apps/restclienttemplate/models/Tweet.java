@@ -44,8 +44,9 @@ public class Tweet{
     public Boolean favorited;
     @ColumnInfo
     public Boolean retweeted;
-    @ColumnInfo
-    public Tweet attachedReTweet;
+//
+//    @ColumnInfo
+//    public Tweet attachedReTweet;
 
     @ColumnInfo
     public  long userID;

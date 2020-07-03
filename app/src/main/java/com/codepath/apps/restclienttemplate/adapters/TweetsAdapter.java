@@ -20,7 +20,7 @@ import com.codepath.apps.restclienttemplate.activity.ProfileActivity;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TwitterApp;
 import com.codepath.apps.restclienttemplate.TwitterClient;
-import com.codepath.apps.restclienttemplate.TwitterUserFunctions;
+import com.codepath.apps.restclienttemplate.models.TwitterUserFunctions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.google.android.material.chip.Chip;
 

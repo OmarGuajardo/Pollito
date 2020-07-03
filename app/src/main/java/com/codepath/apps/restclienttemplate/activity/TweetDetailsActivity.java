@@ -13,10 +13,9 @@ import com.codepath.apps.restclienttemplate.ComposeDialog;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TwitterApp;
 import com.codepath.apps.restclienttemplate.TwitterClient;
-import com.codepath.apps.restclienttemplate.TwitterUserFunctions;
+import com.codepath.apps.restclienttemplate.models.TwitterUserFunctions;
 import com.codepath.apps.restclienttemplate.databinding.ActivityTweetDetailsBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
-import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.google.android.material.snackbar.Snackbar;
 
