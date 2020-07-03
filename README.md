@@ -39,7 +39,11 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-* **Pollito** is re-defined Twitter where Twitter meets Material Design.
+* Huge implementation of the Material Design Library, including features such as:
+ * Shared motion between activites
+ * Variation of scrolling effects
+ * Addition of SnackBar
+ * Use of Chips to enhance user experience
 
 ## Video Walkthrough
 
