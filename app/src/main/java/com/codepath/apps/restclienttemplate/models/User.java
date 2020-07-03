@@ -19,7 +19,13 @@ public class User {
         user.name = jsonObject.getString("name");
         user.handle = jsonObject.getString("screen_name");
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
-        user.profileBackgroundUrl = jsonObject.getString("profile_banner_url");
+
+        try {
+            user.profileBackgroundUrl = jsonObject.getString("profile_banner_url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            user.profileBackgroundUrl = null;
+        }
         return user;
     }
 

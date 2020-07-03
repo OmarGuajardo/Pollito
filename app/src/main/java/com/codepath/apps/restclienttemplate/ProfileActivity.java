@@ -41,19 +41,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         tweet = (Tweet)Parcels.unwrap(getIntent().getExtras().getParcelable("tweet"));
 
+
         ivProfileBanner = findViewById(R.id.main_backdrop);
-        ivProfileImage = findViewById(R.id.ivProfileImageDetails);
 
-        Glide.with(getApplicationContext())
-                .load(tweet.getUser().getProfileImageUrl())
-                .fitCenter()
-                .circleCrop()
-                .into(ivProfileImage);
-
+        if(tweet.getUser().getProfileImageUrl() != null){
         Glide.with(getApplicationContext())
                 .load(tweet.getUser().getProfileBackgroundUrl())
                 .fitCenter()
                 .into(ivProfileBanner);
+        }
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(tweet.getUser().getHandle());
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -78,6 +75,10 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
     }
 
 }

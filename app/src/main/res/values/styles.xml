@@ -13,6 +13,8 @@
         <item name="colorControlNormal">@color/primaryColor</item>
         <item name="colorControlActivated">@color/primaryDarkColor</item>
         <item name="colorControlHighlight">@color/primaryDarkColor</item>
+        <item name="tooltipForegroundColor">@color/twitter_blue</item>
+
         <item name="colorAccent">@color/primaryColor</item>
     </style>
 
