@@ -78,6 +78,15 @@ public class TwitterClient extends OAuthBaseClient {
 		client.post(apiUrl,params,tweetIDString,handler);
 	}
 
+	//Method will favorite tweet
+	public void getFollowers(JsonHttpResponseHandler handler,long userID) {
+		String apiUrl = getApiUrl("followers/list.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("user_id", userID);
+		client.get(apiUrl,params,handler);
+	}
+
 	//Method will retweet
 	public void reTweet(JsonHttpResponseHandler handler,long tweetID, String action) {
 		String apiUrl = getApiUrl("statuses/"+action+"/"+ tweetID +".json");

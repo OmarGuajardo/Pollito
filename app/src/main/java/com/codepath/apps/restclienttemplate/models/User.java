@@ -11,12 +11,15 @@ public class User {
     public String handle;
     public String profileImageUrl;
     public String profileBackgroundUrl;
+    public long userID;
+
 
 
 
     public static User fromJson(JSONObject jsonObject) throws JSONException {
         User user = new User();
         user.name = jsonObject.getString("name");
+        user.userID = jsonObject.getLong("id");
         user.handle = jsonObject.getString("screen_name");
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
 
@@ -29,6 +32,9 @@ public class User {
         return user;
     }
 
+    public long getUserID() {
+        return userID;
+    }
     public String getName() {
         return name;
     }
