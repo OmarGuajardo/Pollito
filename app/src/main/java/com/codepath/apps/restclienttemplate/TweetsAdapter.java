@@ -202,12 +202,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(context,TweetDetailsActivity.class);
-//                    intent.putExtra("tweetObject", Parcels.wrap(t));
-//                    ActivityOptionsCompat options = ActivityOptionsCompat.
-//                            makeSceneTransitionAnimation((Activity) context, (View)itemView, "detailsCard");
-//
-//                    context.startActivity(intent,options.toBundle());
                     onTweetClickedListener.onTweetClickedListener(t,getPosition());
                 }
             });
@@ -237,6 +231,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     //TODO: call a method in TimeLine Activity to start
                     // a dialog screen with some
                     replyListener.onReplyListener(tweetID,tweet.getUser().getHandle());
+                }
+            });
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,ProfileActivity.class);
+                    intent.putExtra("tweet",Parcels.wrap(tweet));
+                    context.startActivity(intent);
                 }
             });
 
