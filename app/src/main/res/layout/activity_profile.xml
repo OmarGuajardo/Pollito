@@ -93,8 +93,9 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:layout_marginTop="2dp" />
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
