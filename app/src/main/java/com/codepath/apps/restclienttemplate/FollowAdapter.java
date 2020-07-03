@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.User;
 
 import java.util.List;
@@ -47,12 +49,23 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName = itemView.findViewById(R.id.tvName);
+        TextView tvHandle = itemView.findViewById(R.id.tvHandle);
+        ImageView ivProfileImage2 = itemView.findViewById(R.id.ivProfileImage2);
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
 
         public void bind(User user) {
-            tvName.setText("TEST TEST TEST");
+
+            tvName.setText(user.getName());
+            tvHandle.setText(user.getHandle());
+            Glide.with(context)
+                    .load(user.getProfileImageUrl())
+                    .fitCenter()
+                    .circleCrop()
+                    .into(ivProfileImage2);
         }
     }
 }

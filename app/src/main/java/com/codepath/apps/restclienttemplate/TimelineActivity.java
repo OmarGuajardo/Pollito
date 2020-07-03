@@ -93,9 +93,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             public void onTweetClickedListener(Tweet tweet,int position) {
                 Intent intent = new Intent(TimelineActivity.this,TweetDetailsActivity.class);
                 intent.putExtra("tweetObject", Parcels.wrap(tweet));
-//                View view = rvTweets.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.materialCardView);
-//                ActivityOptionsCompat options = ActivityOptionsCompat.
-//                        makeSceneTransitionAnimation((Activity) getApplicationContext(),rvTweets.findViewById(R.id.materialCardView), "detailsCard");
 
                 startActivityForResult(intent,EDIT_TEXT_CODE);
             }
