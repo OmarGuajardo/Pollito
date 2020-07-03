@@ -84,7 +84,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
         //Setting the title and home button
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle(tweet.getUser().getHandle());
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("@"+tweet.getUser().getHandle());
 
         //Recycler view setup: layout manager and the adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
