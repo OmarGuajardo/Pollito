@@ -5,30 +5,43 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toolbar;
 
 import com.codepath.apps.restclienttemplate.databinding.ActivityProfileBinding;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 //public class ProfileActivity extends AppCompatActivity  {
 public class ProfileActivity extends AppCompatActivity  {
 ActivityProfileBinding binding;
-Toolbar toolbar;
+MaterialToolbar toolbar;
 ViewPager viewPager;
 TabLayout tabLayout;
+    TabItem followers;
+    TabItem following;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityProfileBinding binding = ActivityProfileBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
-        setContentView(binding.getRoot());
-        setSupportActionBar(binding.mainToolbar);
+        setContentView(R.layout.activity_profile);
+        toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
-        tabLayout = binding.tabLayout;
-        viewPager = binding.viewPager;
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+
+//        tabLayout.addTab(tabLayout.newTab().setText("Followind"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Followers"));
+        tabLayout.bringToFront();
+        followers = findViewById(R.id.tabItemFollower);
+        following = findViewById(R.id.tabItemFollowing);
+
 
 
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+
 
         viewPager.setAdapter(pagerAdapter);
 
@@ -37,6 +50,7 @@ TabLayout tabLayout;
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.d("ProfileActivity", "onTabSelected: asfasdf");
                 viewPager.setCurrentItem(tab.getPosition());
 
             }

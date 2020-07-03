@@ -57,6 +57,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -70,10 +71,12 @@
                 app:tabTextColor="@android:color/darker_gray">
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabItemFollower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Followers"/>
-                    <com.google.android.material.tabs.TabItem
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabItemFollowing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Following"/>
@@ -92,10 +95,12 @@
             app:layout_anchorGravity="bottom|right|end" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
 
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
             android:layout_height="300dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="45dp" />
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
