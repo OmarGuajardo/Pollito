@@ -1,5 +1,9 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,13 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
+@Entity
 public class User {
 
-    public String name;
-    public String handle;
-    public String profileImageUrl;
-    public String profileBackgroundUrl;
+    @ColumnInfo
+    @PrimaryKey
     public long userID;
+
+    @ColumnInfo
+    public String name;
+
+    @ColumnInfo
+    public String handle;
+
+    @ColumnInfo
+    public String profileImageUrl;
+
+    @ColumnInfo
+    public String profileBackgroundUrl;
+
 
 
 

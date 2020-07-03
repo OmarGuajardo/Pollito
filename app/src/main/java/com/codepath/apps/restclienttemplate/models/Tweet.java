@@ -3,6 +3,12 @@ package com.codepath.apps.restclienttemplate.models;
 import android.text.format.DateUtils;
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,19 +21,37 @@ import java.util.List;
 import java.util.Locale;
 
 @Parcel
+@Entity(foreignKeys = @ForeignKey(entity=User.class, parentColumns="id", childColumns="userID"))
 public class Tweet{
     public String TAG = "Tweet.java";
-    public String body;
-    public String createdAt;
-    public int favorite_count;
-    public int retweet_count;
-    public String tweetImageURL;
-    public User user;
+
+    @PrimaryKey
+    @ColumnInfo
     public long id;
 
+    @ColumnInfo
+    public String body;
+    @ColumnInfo
+    public String createdAt;
+    @ColumnInfo
+    public int retweet_count;
+    @ColumnInfo
+    public int favorite_count;
+    @ColumnInfo
+    public String tweetImageURL;
+
+    @ColumnInfo
     public Boolean favorited;
+    @ColumnInfo
     public Boolean retweeted;
+    @ColumnInfo
     public Tweet attachedReTweet;
+
+    @ColumnInfo
+    public  long userID;
+
+    @Ignore
+    public User user;
 
 
     //Main Setters
@@ -45,12 +69,14 @@ public class Tweet{
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.id = jsonObject.getLong("id");
-        tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.tweetImageURL = extractMedia(jsonObject);
         tweet.favorite_count = jsonObject.getInt("favorite_count");
         tweet.retweet_count = jsonObject.getInt("retweet_count");
         tweet.favorited = jsonObject.getBoolean("favorited");
         tweet.retweeted = jsonObject.getBoolean("retweeted");
+        User user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.user = user;
+        tweet.userID = user.userID;
         try {
             JSONObject jsonObject1 = jsonObject.getJSONObject("retweeted_status");
             tweet.attachedReTweet =  Tweet.fromJson(jsonObject1);;
