@@ -85,23 +85,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/ivProfileImageDetails"-->
-<!--            app:layout_scrollFlags="scroll|snap"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="@dimen/activity_horizontal_margin"-->
-<!--            app:layout_anchor="@id/main_appbar"-->
-<!--            android:src="@drawable/ic_vector_messages_stroke_white"-->
-
-<!--            android:backgroundTint="@color/twitter_blue"-->
-<!--            android:background="@color/twitter_blue"-->
-<!--            android:tint="@android:color/white"-->
-
-<!--            app:borderWidth="0dp"-->
-<!--            app:layout_anchorGravity="bottom|right|end"-->
-<!--            tools:srcCompat="@tools:sample/avatars" />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFollow"
             android:layout_width="match_parent"

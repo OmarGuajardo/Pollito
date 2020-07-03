@@ -234,6 +234,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 }
             });
 
+            tvRetweetStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,ProfileActivity.class);
+                    intent.putExtra("tweet",Parcels.wrap(t));
+                    context.startActivity(intent);
+                }
+            });
             ivProfileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
